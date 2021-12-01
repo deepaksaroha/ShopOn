@@ -1,9 +1,17 @@
 const express = require('express');
-const router = express.Router();
-const UserCredential = require('../models/user-credential');
 const bcrypt = require('bcryptjs');
+const router = express.Router();
 
+const UserCredential = require('../models/user-credential');
+const User = require('../models/user')
+const cart = require('./carts')
+
+//cart apis
+router.use('/cart', cart);
+
+//user login
 router.post('/', (req, res) => {
+    console.log(req.body);
     if (!req.body) {
         res.status(400).send({error: "Email and Password not present in request"});
         return;
@@ -21,7 +29,11 @@ router.post('/', (req, res) => {
         return;
     }
 
-    UserCredential.findOne({ email }).then(user => {
+    const cartArray = req.session.cart;
+        
+
+    UserCredential.findOne({ email })
+    .then(user => {
         if (!user) {
             res.status(400).send({error: "User not signed up"});
             return;
@@ -35,12 +47,23 @@ router.post('/', (req, res) => {
         }
 
         req.session.userId = user.id;
-        res.status(204).send();
-    }).catch(() => {
+        return User.updateOne({ userId: req.session.userId }, { $push: { cart: { $each: cartArray } } })
+        // res.status(204).send();
+    })
+    .then(()=>{
+        delete req.session.cart;
+        res.status(200).send({message: 'Login successfull'});
+    })
+    .catch(() => {
+        if(req.session.userId){
+            delete req.session.userId;
+        }
         res.status(500).send({ error: "Internal Server Error" });
     });
 });
 
+
+//user logout
 router.delete('/me', (req, res) => {
     delete req.session.userId;
     res.status(204).send();
