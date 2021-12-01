@@ -1,37 +1,28 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-    userId: {
+const cartSchema = new Schema({
+    cartId: {
         type: String,
         required: true,
         unique: true
     },
-    firstName: String,
-    lastName: String,
-    email: {
+    owner: {
         type: String,
         required: true,
         unique: true
     },
-    phone: Number,
-    age: Number,
-    gender: {
-        type: String,
-        enum: ["male", "female", "any"]
-    },
-    cart: [
+    products: [
         {
             productId: String,
             name: String,
             quantity: {
                 type: Number,
-                min: 1
+                min: 0
             },
             price: Number
         }
     ],
-    addresses:[String],
     createdAt: {
         type: Date,
         default: Date.now()
@@ -42,4 +33,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Cart', cartSchema);

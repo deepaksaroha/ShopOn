@@ -1,37 +1,36 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const orderSchema = new Schema({
+    orderId: {
+        type: String,
+        required: true,
+        unique: true
+    },
     userId: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
-    firstName: String,
-    lastName: String,
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    phone: Number,
-    age: Number,
-    gender: {
-        type: String,
-        enum: ["male", "female", "any"]
-    },
-    cart: [
+    products: [
         {
             productId: String,
             name: String,
             quantity: {
                 type: Number,
-                min: 1
+                min: 0
             },
-            price: Number
+            price: Number,
         }
     ],
-    addresses:[String],
+    total: {
+        type: Number,
+        min: 0
+    },
+    status: {
+        type: String,
+        enum: ["Active", "Cancelled", "Completed"],
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now()
@@ -42,4 +41,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Order', orderSchema);
