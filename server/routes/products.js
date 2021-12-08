@@ -11,8 +11,8 @@ router.get('/', (req, res, next)=>{
     const reg = new RegExp(req.query.searchWord);
     console.log(reg);
     
-    if(req.query.searchWord) { searchObject.name = {$regex: new RegExp(req.query.searchWord), $options: 'i'} }
-    if(req.query.category) { searchObject.category = req.query.category }
+    if(req.query.searchText) { searchObject.name = {$regex: new RegExp(req.query.searchText), $options: 'i'} }
+    if(req.query.category) { searchObject.categories = req.query.category }
     if(req.query.priceFrom && req.query.priceTo) { searchObject.price = { $gte: req.query.priceFrom, $lte: req.query.priceTo } }
     if(req.query.color) { searchObject['specification.color'] = req.query.color }
 
