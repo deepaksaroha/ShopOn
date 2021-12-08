@@ -27,6 +27,16 @@ router.put('/', (req, res, next)=>{
 
 
     if(req.session.userId === undefined){
+        // let isPresent = false; 
+        // req.session.cart.forEach(ele=>{
+        //     if(ele.productId === productId){
+        //         ele.quantity = ele.quantity+quantity;
+        //         isPresent = true;
+        //     }
+        // })
+        // if(!isPresent){
+        //     req.session.cart.push({ productId, name, quantity, price });
+        // }
         req.session.cart.push({ productId, name, quantity, price });
         res.status(200).send({message: 'Item added to cart'});
         return;
@@ -43,11 +53,18 @@ router.put('/', (req, res, next)=>{
 
 //update quantity of a product
 router.patch('/', (req, res, next)=>{
-    if(!auth.authenticate()){
-        res.status(400).send({error: 'User not loggedin'})
-    }
 
     const { productId, incValue } = req.body;
+
+    if(req.session.userId === undefined){
+        req.session.cart.forEach(ele=>{
+            if(ele.productId === productId){
+                ele.quantity = ele.quantity+incValue;
+            }
+        })
+        res.status(200).send({message: 'Quantity Incremented/Decremented'});
+        return;
+    }
 
     User.updateOne({ userId: req.session.userId, 'cart.productId': productId } , { $inc: { 'cart.$.quantity': incValue } })
     .then(()=>{
@@ -61,11 +78,18 @@ router.patch('/', (req, res, next)=>{
 
 //delete product from cart
 router.delete('/', (req, res, next)=>{
-    if(!auth.authenticate()){
-        res.status(400).send({error: 'User not loggedin'})
-    }
 
-    const productId = req.query.productId;
+    const productId = req.body.productId;
+
+    if(req.session.userId === undefined){
+        // req.session.cart = req.session.cart.filter(ele=>{
+        //     return ele.productId !== productId
+        // })
+
+        req.session.cart.splice(req.session.cart.findIndex(a => a.productId === productId) , 1);
+        res.status(200).send({message: 'Item added to cart'});
+        return;
+    }
 
     User.updateOne({ userId: req.session.userId }, { $pull: { cart: { productId: productId } } })
     .then(()=>{
