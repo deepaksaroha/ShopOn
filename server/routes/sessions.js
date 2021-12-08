@@ -1,13 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const auth = require('../middlewares/auth')
 const router = express.Router();
 
 const UserCredential = require('../models/user-credential');
 const User = require('../models/user')
-const cart = require('./carts')
 
-//cart apis
-router.use('/cart', cart);
+
+//user login status
+router.get('/', auth.authenticate);
 
 //user login
 router.post('/', (req, res) => {
