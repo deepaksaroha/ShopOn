@@ -48,11 +48,11 @@ class Signup extends React.Component{
             <React.Fragment>
                 <form>
                     <label for="email">Email:</label>
-                    <input id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" />
+                    <input type="email" id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" />
                     <label for="password">Password:</label>
-                    <input id="password" name='password' value={this.state.password} onChange={this.handleChange} placeholder="password" />
+                    <input type="password" id="password" name='password' value={this.state.password} onChange={this.handleChange} placeholder="password" />
                     <label for="confirm-password">Confirm Password:</label>
-                    <input id="confirm-password" name='cnfPassword' value={this.state.cnfPassword} onChange={this.handleChange} placeholder="Re-enter password" />
+                    <input type="password" id="confirm-password" name='cnfPassword' value={this.state.cnfPassword} onChange={this.handleChange} placeholder="Re-enter password" />
                     <button onClick={this.handleSubmit}>Signup</button>
                 </form>
             </React.Fragment>
@@ -60,3 +60,5 @@ class Signup extends React.Component{
     }
 
 }
+
+export default Signup;

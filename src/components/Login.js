@@ -19,7 +19,9 @@ class Login extends React.Component {
 
 
     validateForm(){
-        if(! new RegExp('^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z]+\.com').test(this.state.email)){
+        if()
+
+        if(!new RegExp('^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z]+\.com').test(this.state.email)){
             this.setState({
                 error: 'Invalid email'
             })
@@ -45,19 +47,16 @@ class Login extends React.Component {
                     password: this.state.password
                 }
             })
-            .then(response=>{
-                return response.json();
-            })
-            .then(response=>{
+            .then(response=>{                
                 this.props.history.goBack();
             })
             .catch(error=>{
-                this.setState({
-                    error: error
-                })
+                console.log(error.error);
             })
         }
     }
+
+    
 
 
     render(){
