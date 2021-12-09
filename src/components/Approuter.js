@@ -9,12 +9,6 @@ import Product from './Product'
 import { Route, Switch } from 'react-router-dom'
 
 class AppRouter extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
 
     render(){
         return(
@@ -30,7 +24,7 @@ class AppRouter extends React.Component{
             </Switch>
         )
     }
-    
+
 }
 
 export default AppRouter;
