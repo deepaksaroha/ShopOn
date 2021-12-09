@@ -18,6 +18,41 @@ class Signup extends React.Component{
         })
     }
 
+    validateForm(){
+        if(this.state.email === '' || this.state.password === '' || this.state.cnfPassword === ''){
+            this.setState({
+                error: 'All fields are mandatory'
+            })
+            return false;
+        }
+
+        if(!new RegExp('').test(this.state.email)){
+            this.setState({
+                error: 'Invalid email'
+            })
+            return false;
+        }
+
+        if(!new RegExp('').test(this.state.password)){
+            this.setState({
+                error: 'password not satisfying requirements'
+            })
+            return false;
+        }
+
+        if(this.state.cnfPassword !== this.state.password){
+            this.setState({
+                error: 'passwords are not matching'
+            })
+            return false;
+        }
+
+        this.setState({
+            error: ''
+        })
+        return true;
+    }
+
     handleSubmit(e){
         e.preventDefault();
         if(validate()){
@@ -55,6 +90,7 @@ class Signup extends React.Component{
                     <input type="password" id="confirm-password" name='cnfPassword' value={this.state.cnfPassword} onChange={this.handleChange} placeholder="Re-enter password" />
                     <button onClick={this.handleSubmit}>Signup</button>
                 </form>
+                <p>{this.state.error}</p>
             </React.Fragment>
         )
     }

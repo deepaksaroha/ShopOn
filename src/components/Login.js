@@ -19,15 +19,19 @@ class Login extends React.Component {
 
 
     validateForm(){
-        if()
+        if(this.state.email === '' || this.state.password === ''){
+            this.setState({
+                error: 'All fields are mandatory'
+            })
+            return false;
+        }
 
-        if(!new RegExp('^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z]+\.com').test(this.state.email)){
+        if(!new RegExp('').test(this.state.email)){
             this.setState({
                 error: 'Invalid email'
             })
             return false;
-        }
-        
+        }    
 
         this.setState({
             error: ''

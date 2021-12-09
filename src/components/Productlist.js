@@ -16,9 +16,9 @@ class Products extends React.Component{
     getProductsData(){
         let URLString = 'https://localhost:4000/api/products?'
 
-        if(this.props.location.state.searchWord !== undefined){
-            URLString += 'searchWord='+this.props.location.state.searchWord;
-        }else if(this.props.location.state.category !== undefined){
+        if(this.props.match.params.searchText !== undefined){
+            URLString += 'searchWord='+this.props.location.state.searchText;
+        }else if(this.props.match.params.category !== undefined){
             URLString += 'category='+this.props.location.state.category;
         }
        
@@ -47,36 +47,20 @@ class Products extends React.Component{
         this.getCartData();
     }
 
-    getLoginStatus(){
-        axios.get('https://localhost:4000/api/sessions')
-        .then(response=>{
-            if(this.state.isLoggedin !== true){
-                this.setState({
-                    isLoggedin: true
-                })
-            }
-        })
-        .then(error=>{
-            if(this.state.isLoggedin !== false){
-                this.setState({
-                    isLoggedin: false
-                })
-            }
-        })
+    handleAddProduct(){
+        this.getCartData();
     }
 
     render(){
-        this.getLoginStatus();
         const cartProductIds = this.state.cart.map(product=>product.productId)
 
         return(
             <React.Fragment>
-                <Navbar cartCount={this.state.cart.length} loginStatus={this.state.isLoggedin}/>
+                <Navbar cartCount={this.state.cart.length}/>
                 {
                     this.state.products.map(product=>{
                         return <div>
-                            <ProductCard productData={product} handleAddProduct={this.handleAddProduct}/>
-                            {product.productId in cartProductIds? <p>Item in cart</p>:''}
+                            <ProductCard {...product} inCart={product.productId in cartProductIds} handleAddProduct={this.handleAddProduct}/>
                         </div>
                     })
                 }

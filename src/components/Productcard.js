@@ -1,17 +1,18 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function ProductCard(props){
 
 
     function handleAddToCart(){
-        axios.get('https://localhot:4000/users/cart', 
+        axios.put('https://localhot:4000/api/users/cart', 
             {
                 data: {
-                    productId: props.productData.productId,
-                    name: props.productData.name,
+                    productId: props.productId,
+                    name: props.name,
                     quantity: 1,
-                    price: props.productData.price
+                    price: props.price
                 }
             }
         )
@@ -24,13 +25,13 @@ function ProductCard(props){
     }
 
     function handleBuy(){
-        axios.get('https://localhot:4000/users/cart', 
+        axios.put('https://localhot:4000/api/users/cart',
             {
                 data: {
-                    productId: props.productData.productId,
-                    name: props.productData.name,
+                    productId: props.productId,
+                    name: props.name,
                     quantity: 1,
-                    price: props.productData.price
+                    price: props.price
                 }
             }
         )
@@ -45,12 +46,23 @@ function ProductCard(props){
 
 
     return <div>
-        <div id={props.productData.productId}>
+        <div id={props.productId}>
             <img src="" alt=""/>
-            <p>{props.productData.name}</p>
-            <p>{props.productData.price}</p>
-            <button onClick={handleAddToCart}>Add to Cart</button>
-            <button onClick={handleBuy}>Buy Now</button>
+            <p>{props.name}</p>
+            <p>{props.price}</p>
+            {
+                props.inCart?
+                <button><Link to="/cart">Add to Cart</Link></button>
+                :
+                <button onClick={handleAddToCart}>Add to Cart</button>
+            }
+            {
+                props.inCart?
+                <button><Link to="/cart">Buy Now</Link></button>
+                :
+                <button onClick={handleBuy}>Buy Now</button>
+            }
+            
         </div>
     </div>
 }
