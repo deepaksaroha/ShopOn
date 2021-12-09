@@ -14,6 +14,7 @@ class Navbar extends React.Component {
 
     getData(){
         axios.get('https://localhost:4000/api/users/cart')
+        .then(response=>response.json())
         .then(response=>{
             this.setState({
                 cartCount: response.cart.length
@@ -59,7 +60,7 @@ class Navbar extends React.Component {
                     <input type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} />
                     <Link to={"/search/"+this.state.searchText}><button>Search</button></Link>
                 </form>
-                <Link to="/cart">Cart({this.props.cartCount})</Link>
+                <Link to="/cart">Cart({this.state.cartCount})</Link>
                 {
                     this.loginStatus ?
                     <button onClick={this.handleLogout}>Logout</button>
