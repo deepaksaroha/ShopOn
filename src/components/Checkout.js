@@ -7,12 +7,21 @@ class Checkout extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            cart : []
+            cart : [],
+            loginStatus: false
         }
     }
 
     componentDidMount(){
-        axios.get('https://localhost:4000/users/cart')
+        axios.get('https://localhost:4000/api/sessions')
+        .then(response=>{
+            this.setState({
+                loginStatus: true
+            })
+        })
+
+
+        axios.get('https://localhost:4000/api/users/cart')
         .then(response=>{
             this.setState({
                 cart: response.cart
@@ -23,7 +32,14 @@ class Checkout extends React.Component{
         })
     }
 
+    toLogin(){
+        this.props.history.push('/login');
+    }
+
     render(){
+        if(!this.state.login){
+            this.toLogin();
+        }
 
         let amount = 0;
         this.state.cart.forEach(cartItem=>{
