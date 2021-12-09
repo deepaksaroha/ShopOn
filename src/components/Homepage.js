@@ -12,15 +12,13 @@ class Homepage extends React.Component{
         }
     }
 
-
-
     render(){
         return(
             <React.Fragment>
                 <Navbar />
                 <Categories />
-                <Banners />
-                <Recommndations />
+                {/* <Banners />
+                <Recommndations /> */}
             </React.Fragment>
         )
     }
