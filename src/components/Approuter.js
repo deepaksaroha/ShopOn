@@ -30,7 +30,7 @@ class AppRouter extends React.Component{
             </Switch>
         )
     }
-
+    
 }
 
 export default AppRouter;
