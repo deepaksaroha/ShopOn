@@ -2,12 +2,6 @@ import axios from 'axios';
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
 
     handleMinus(){
         if(this.props.item.quantity>1){
