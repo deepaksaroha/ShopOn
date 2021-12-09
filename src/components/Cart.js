@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import CartItem  from './Cartitem';
 import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 class Cart extends React.Component{
     constructor(props){
@@ -17,32 +18,12 @@ class Cart extends React.Component{
         axios.get('https://localhost:4000/users/cart')
         .then(response=>{
             this.setState({
-                cart: response.cart
+                cart: response.cart,
+                cartCount: response.cart.length
             })
         })
         .catch(error=>{
             console.log('Something went wrong')
-        })
-    }
-
-    componentDidMount(){
-        this.getCart();
-    }
-
-    handleCheckoutClick(){
-        this.props.history.push('/checkout')
-    }
-
-    getCartCount(){
-        axios.get('https://localhost:4000/api/users/cart')
-        .then(response=>{
-            if(response.cart.length !== this.state.cartCount){
-                this.setState({
-                    cartCount: response.cart.length
-                })
-            }
-        })
-        .then(error=>{
         })
     }
 
@@ -64,14 +45,16 @@ class Cart extends React.Component{
         })
     }
 
-    handleDelete(){
+    componentDidMount(){
+        this.getCart();
+        this.getLoginStatus();
+    }
+
+    handleChangeItem(){
         this.getCart();
     }
 
     render(){
-        
-        this.getCartCount();
-        this.getLoginStatus();
 
         let amount = 0;
         this.state.cart.forEach(cartItem=>{
@@ -81,7 +64,7 @@ class Cart extends React.Component{
 
         return(
             <React.Fragment>
-                <Navbar cartCount={this.state.cartCount} loginStatus={this.state.isLoggedin}/>
+                <Navbar cartCount={this.state.cartCount}/>
                 <div>
                     {
                         this.state.cart.map(cartItem=>{
@@ -92,7 +75,7 @@ class Cart extends React.Component{
                 <div>
                     <p>Cart Value: Rs {amount}</p>
                 </div>
-                <button onClick={this.handleCheckoutClick}>Proceed to Checkout</button>
+                <button><Link to="/checkout">Proceed to Checkout</Link></button>
             </React.Fragment>
         )
     }
