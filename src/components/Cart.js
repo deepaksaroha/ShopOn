@@ -9,13 +9,14 @@ class Cart extends React.Component{
         super(props);
         this.state = {
             cart : [],
-            isLoggedin : false,
-            cartCount: 0
+            cartCount: 0,
+            isLoggedin : false
         }
     }
 
     getCart(){
-        axios.get('https://localhost:4000/users/cart')
+        axios.get('https://localhost:4000/api/users/cart')
+        .then(response=>response.json())
         .then(response=>{
             this.setState({
                 cart: response.cart,
