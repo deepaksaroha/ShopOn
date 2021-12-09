@@ -5,7 +5,7 @@ import Checkout from './Checkout'
 import Login from './Login'
 import Productlist from './Productlist'
 import Signup from './Signup'
-import Product from './Product'
+import ProductDescription from './Productdescription'
 import { Route, Switch } from 'react-router-dom'
 
 class AppRouter extends React.Component{
@@ -18,7 +18,7 @@ class AppRouter extends React.Component{
                 <Route path="/signup" component={Signup} />
                 <Route path="/category/:category" component={Productlist} />
                 <Route path="/search/:searchText" component={Productlist} />
-                <Route path="/products/:productId" component={Product} />
+                <Route path="/products/:productId" component={ProductDescription} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/checkout" component={Checkout} />
             </Switch>
