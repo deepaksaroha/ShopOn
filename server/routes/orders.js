@@ -2,7 +2,14 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
 const Order = require('../models/order')
+const Razorpay = require('razorpay')
 const { v4: uuidv4 } = require('uuid');
+
+
+const rzpInstance = new Razorpay({
+    key_id: process.env.RZP_KEY_ID,
+    key_secret: process.env.RZP_KEY_SECRET
+})
 
 //get orders
 router.get('/', auth.authenticate, (req, res, next)=>{
@@ -44,8 +51,26 @@ router.post('/', (req, res, next)=>{
     const orderObject = new Order({ orderId: orderId, userId: req.session.userId, products: products, total: total, status: 'Active' });
 
     orderObject.save()
-    .then((order)=>{
-        res.status(200).send({orderId: order.orderId})
+    .then(()=>{
+        const rzpOrderId = orderId;
+        const options = {
+            amount: total,
+            currency: "INR",
+            reciept: rzpOrderId
+        }
+
+        rzpInstance.orders.create(options, (err, rzpOrder)=>{
+            if(err){
+                res.status(500).send({ error: 'Error in creating razorpay order' });
+                return;
+            }
+
+            res.status(201).send({
+                amount: total,
+                currency: 'INR',
+                rzporderId: rzpOrderId
+            })
+        })
     })
     .catch(()=>{
         res.status(500).send({error: 'Internal server error'})
