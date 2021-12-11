@@ -36,6 +36,10 @@ class Checkout extends React.Component{
         this.props.history.push('/login');
     }
 
+    handleBuy(){
+        
+    }
+
     render(){
         if(!this.state.login){
             this.toLogin();
@@ -50,19 +54,27 @@ class Checkout extends React.Component{
         return(
             <React.Fragment>
                 <Navbar />
-                <div>
-                    {
-                        this.state.cart.map(cartItem=>{
-                            return <Checkoutitem item={cartItem} />
-                        })
-                    }
-                </div>
-                <div>
-                    <p>Cart Value: Rs {amount}</p>
-                    <p>Delivery Charge: Rs 50</p>
-                    <p>Total Amount: Rs {amount+50}</p>
-                </div>
-                <button><a href="#">Pay</a></button>
+                {
+                    this.state.cart.length>0?
+                    <div>
+                        <div>
+                            {
+                                this.state.cart.map(cartItem=>{
+                                    return <Checkoutitem item={cartItem} />
+                                })
+                            }
+                        </div>
+                        <div>
+                            <p>Cart Value: Rs {amount}</p>
+                            <p>Delivery Charge: Rs 50</p>
+                            <p>Total Amount: Rs {amount+50}</p>
+                        </div>
+                        <button onClick={this.handleBuy}>Buy</button>
+                    </div>
+                    :
+                    <p>Your Cart is Empty</p>
+                }
+                
             </React.Fragment>
         )
     }
