@@ -66,17 +66,25 @@ class Cart extends React.Component{
         return(
             <React.Fragment>
                 <Navbar cartCount={this.state.cartCount}/>
-                <div>
-                    {
-                        this.state.cart.map(cartItem=>{
-                            return <CartItem item={cartItem} handleChangeItem={this.handleChangeItem} />
-                        })
-                    }
-                </div>
-                <div>
-                    <p>Cart Value: Rs {amount}</p>
-                </div>
-                <button><Link to="/checkout">Proceed to Checkout</Link></button>
+                {
+                    this.state.cartCount>0?
+                    <div>
+                        <div>
+                            {
+                                this.state.cart.map(cartItem=>{
+                                    return <CartItem item={cartItem} handleChangeItem={this.handleChangeItem} />
+                                })
+                            }
+                        </div>
+                        <div>
+                            <p>Cart Value: Rs {amount}</p>
+                        </div>
+                        <button><Link to="/checkout">Proceed to Checkout</Link></button>
+                    </div>
+                    :
+                    <p>Your Cart is Empty</p>
+                }
+                
             </React.Fragment>
         )
     }
