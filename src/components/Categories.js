@@ -12,13 +12,10 @@ class Categories extends React.Component{
     }
 
     componentDidMount(){
-        axios.get('https://localhost:4000/api/categories')
-        .then(response=>{
-            return response.json();
-        })
+        axios.get('/api/categories')
         .then(response=>{
             this.setState({
-                categories: response.categories
+                categories: response.data.categories
             })
         })
         .catch(error=>{
@@ -27,17 +24,18 @@ class Categories extends React.Component{
     }
 
     render(){
+
         return(
             <React.Fragment>
                 <div>
                     {
                         this.state.categories.map(category=>{
                             return <div key={category.categoryId}>
-                                <Link to={"/category/"+category.name}>category.categoryName</Link>
+                                <Link to={"/category/"+category.name}>{category.name}</Link>
                                 <div>
                                     {
                                         category.subcategories.map(subcategory=>{
-                                            return <Link to={"/category/"+subcategory} key={subcategory}>subcategory</Link>
+                                            return <Link to={"/category/"+subcategory} key={subcategory}>{subcategory}</Link>
                                         })
                                     }
                                 </div>
