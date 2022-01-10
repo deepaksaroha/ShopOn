@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 
 class Checkoutitem extends React.Component {
