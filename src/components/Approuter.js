@@ -9,20 +9,22 @@ import ProductDescription from './Productdescription'
 import { Route, Switch } from 'react-router-dom'
 
 class AppRouter extends React.Component{
-
+    
     render(){
         return(
-            <Switch>
-                <Route exact path="/" component={Homepage} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/category/:category" component={Productlist} />
-                <Route path="/search/:searchText" component={Productlist} />
-                <Route path="/products/:productId" component={ProductDescription} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/checkout" component={Checkout} />
-            </Switch>
-        )
+                <Switch>
+                    <Route exact path="/" component={Homepage} />
+                    <Route path="/home" component={Homepage} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/signup" component={Signup} />
+                    <Route path="/category/:category" component={Productlist} />
+                    <Route path="/search/:searchText" component={Productlist} />
+                    <Route path="/products/:productId" component={ProductDescription} />
+                    <Route path="/cart" component={Cart} />
+                    <Route path="/checkout" component={Checkout} />
+                </Switch>
+            )
+        
     }
 
 }
