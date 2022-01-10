@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
 
-const connect = (dbConfig) => {
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
+exports.connect = (dbConfig) => {
     try {
 
-        // const {host, username, password, database} = dbConfig;
-        const {host, database} = dbConfig;
+        const {host, username, password, database} = dbConfig;
+        // const {host, database} = dbConfig;
 
         let absoluteHostName = host;
         
-        const mongoUri = `mongodb://${absoluteHostName}/${database}`;
+        // const mongoUri = `mongodb://${absoluteHostName}/${database}`;
+        // const mongoUri = `mongodb://localhost/test2`;
         
         // if (username) {
         //     if (password !== undefined) {
@@ -18,20 +23,15 @@ const connect = (dbConfig) => {
         //     }
         // }
 
-        // const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;
+        const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;
 
         return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
     } catch (err) {
         console.log(`Error connecting to MongoDB: ${err}`);
-        throw err;
+        // throw err;
     }
 };
 
-const getClient = () => {
+exports.getClient = () => {
     return mongoose.connection.getClient();
 }
-
-module.exports = {
-    connect,
-    getClient
-};
