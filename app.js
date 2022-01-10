@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 
 const api = require('./server/api');
-const db = require('./server/db');
+const { connect, getClient } = require('./server/db');
 
 //Configure .env
 require('dotenv').config();
@@ -16,13 +16,13 @@ require('dotenv').config();
 const port = process.env.PORT || 4000;
 
 //Initiate connection with database
-db.connect({
-    // host: process.env.DB_HOST,
-    // username: process.env.DB_USER,
-    // password: process.env.DB_PASS,
-    // database: process.env.DB_NAME
-    host: 'localhost',
-    database: 'test1',
+connect({
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+    // host: 'localhost',
+    // database: 'test2',
 
 }).then(() => {
     //Handle /api with the api middleware
@@ -30,9 +30,9 @@ db.connect({
         genid() {
             return genuuid() // use UUIDs for session IDs
         },
-        store: new MongoStore({ client: db.getClient() }),
-        // secret: process.env.SESSION_SECRET,
-        secret: 'Secret',
+        store: new MongoStore({ client: getClient() }),
+        secret: process.env.SESSION_SECRET,
+        // secret: 'Secret',
         resave: false,
         saveUninitialized: true,
     }),
