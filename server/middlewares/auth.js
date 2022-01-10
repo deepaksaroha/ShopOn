@@ -1,6 +1,6 @@
 const authenticate = (req, res, next) => {
     if (!req.session.userId) {
-        res.status(401).send('Not Logged In');
+        res.status(401).send({error:'Not Logged In'});
         return;
     }
 
