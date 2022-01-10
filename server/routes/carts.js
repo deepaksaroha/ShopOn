@@ -8,35 +8,23 @@ const User = require('../models/user')
 router.get('/', (req, res, next)=>{
     if(req.session.userId === undefined){
         res.status(200).send({cart : req.session.cart});
-        return;
+    }else{
+        User.findOne({ userId: req.session.userId }, { cart: 1 })
+        .then(cart=>{
+            res.status(200).send({cart: cart.cart})
+        })
+        .catch(()=>{
+            res.status(500).send({error: 'internal server error'})
+        })
     }
-
-    User.findOne({ userId: req.session.userId }, { cart: 1 })
-    .then(cart=>{
-        res.status(200).send({cart: cart})
-    })
-    .catch(()=>{
-        res.status(500).send({error: 'internal server error'})
-    })
 })
 
-//put cart
+//put product in cart
 router.put('/', (req, res, next)=>{
 
     const { productId, name, quantity, price } = req.body;
 
-
     if(req.session.userId === undefined){
-        // let isPresent = false; 
-        // req.session.cart.forEach(ele=>{
-        //     if(ele.productId === productId){
-        //         ele.quantity = ele.quantity+quantity;
-        //         isPresent = true;
-        //     }
-        // })
-        // if(!isPresent){
-        //     req.session.cart.push({ productId, name, quantity, price });
-        // }
         req.session.cart.push({ productId, name, quantity, price });
         res.status(200).send({message: 'Item added to cart'});
         return;
@@ -56,49 +44,55 @@ router.patch('/', (req, res, next)=>{
 
     const { productId, incValue } = req.body;
 
-    if(req.session.userId === undefined){
-        req.session.cart.forEach(ele=>{
-            if(ele.productId === productId){
-                ele.quantity = ele.quantity+incValue;
+    if(incValue === undefined){
+        if(req.session.userId === undefined){
+            req.session.cart = req.session.cart.filter(ele=>ele.productId !== productId)
+            res.status(200).send({message: 'Item removed from cart'});
+        }else{
+            User.updateOne({ userId: req.session.userId }, { $pull: { cart: { productId: productId } } })
+            .then(()=>{
+                res.status(200).send({message: 'Item Removed'})
+            })
+            .catch(()=>{
+                res.status(500).send({error: 'Internal server error'})
+            })
+        }
+    
+        
+    }else{
+        if(req.session.userId === undefined){
+            const cart = req.session.cart;
+            for(let index in cart){
+                let item = cart[index];
+                if(item.productId === productId){
+                    if(incValue < 0){
+                        if(item.quantity > 1){
+                            item.quantity = item.quantity+incValue;
+                        }
+                    }else{
+                        item.quantity = item.quantity+incValue;
+                    }
+                    res.status(200).send({message: 'Quantity Incremented/Decremented'});
+                    return;
+                }
             }
-        })
-        res.status(200).send({message: 'Quantity Incremented/Decremented'});
-        return;
+            res.status(200).send({message: 'Quantity Incremented/Decremented'});
+            return;
+        }else{
+            let query = { userId: req.session.userId, 'cart.productId': productId };
+            if(incValue < 0){
+                query['cart.quantity'] = {$gt:1};
+            }
+    
+            User.updateOne(query , { $inc: { 'cart.$.quantity': incValue } })
+            .then(()=>{
+                res.status(200).send({message: 'Quantity Incremented/Decremented'})
+            })
+            .catch(()=>{
+                res.status(500).send({error: 'Internal server error'})
+            })
+        }
     }
-
-    User.updateOne({ userId: req.session.userId, 'cart.productId': productId } , { $inc: { 'cart.$.quantity': incValue } })
-    .then(()=>{
-        res.status(200).send({message: 'Quantity Incremented/Decremented'})
-    })
-    .catch(()=>{
-        res.status(500).send({error: 'Internal server error'})
-    })
-
-})
-
-//delete product from cart
-router.delete('/', (req, res, next)=>{
-
-    const productId = req.body.productId;
-
-    if(req.session.userId === undefined){
-        // req.session.cart = req.session.cart.filter(ele=>{
-        //     return ele.productId !== productId
-        // })
-
-        req.session.cart.splice(req.session.cart.findIndex(a => a.productId === productId) , 1);
-        res.status(200).send({message: 'Item added to cart'});
-        return;
-    }
-
-    User.updateOne({ userId: req.session.userId }, { $pull: { cart: { productId: productId } } })
-    .then(()=>{
-        res.status(200).send({message: 'Item Removed'})
-    })
-    .catch(()=>{
-        res.status(500).send({error: 'Internal server error'})
-    })
-
 })
 
 module.exports = router;
