@@ -3,29 +3,23 @@ import React from 'react';
 
 class CartItem extends React.Component {
 
-    handleMinus(){
-        if(this.props.item.quantity>1){
-            axios.patch('https://localhost:4000/api/users/cart',{
-                data:{
-                    productId: this.props.item.productId,
-                    incValue: -1
-                }
-            })
-            .then(response=>{
-                this.props.handleChangeItem();
-            })
-            .catch(error=>{
-                console.log(error.error);
-            })
-        }
+    handleMinus=()=>{
+        axios.patch('/api/users/cart',{
+            productId: this.props.item.productId,
+            incValue: -1
+        })
+        .then(response=>{
+            this.props.handleChangeItem();
+        })
+        .catch(error=>{
+            console.log(error.error);
+        })
     }
 
-    handlePlus(){
-        axios.patch('https://localhost:4000/api/users/cart',{
-            data:{
-                productId: this.props.item.productId,
-                incValue: 1
-            }
+    handlePlus=()=>{
+        axios.patch('/api/users/cart',{
+            productId: this.props.item.productId,
+            incValue: 1
         })
         .then(response=>{
             this.props.handleChangeItem()
@@ -35,11 +29,9 @@ class CartItem extends React.Component {
         })
     }
 
-    handleDelete(){
-        axios.delete('https://localhost:4000/api/users/cart',{
-            data:{
-                productId: this.props.item.productId
-            }
+    handleDelete=()=>{
+        axios.patch('/api/users/cart',{
+            productId: this.props.item.productId
         })
         .then(response=>{
             this.props.handleChangeItem()

@@ -8,41 +8,39 @@ class Cart extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            cart : [],
+            isLoaded: false,
+            isLoggedIn: false,
             cartCount: 0,
-            isLoggedin : false
+            cart : []
         }
     }
 
-    getCart(){
-        axios.get('https://localhost:4000/api/users/cart')
-        .then(response=>response.json())
+    getCart=()=>{
+        axios.get('/api/users/cart')
         .then(response=>{
             this.setState({
-                cart: response.cart,
-                cartCount: response.cart.length
+                cart: response.data.cart,
+                cartCount: response.data.cart.length
             })
         })
         .catch(error=>{
             console.log('Something went wrong')
         })
     }
-
-    getLoginStatus(){
-        axios.get('https://localhost:4000/api/sessions')
+    
+    getLoginStatus=()=>{
+        axios.get('/api/sessions')
         .then(response=>{
-            if(this.state.isLoggedin !== true){
-                this.setState({
-                    isLoggedin: true
-                })
-            }
+            this.setState({
+                isLoggedIn: true,
+                isLoaded: true
+            })
         })
-        .then(error=>{
-            if(this.state.isLoggedin !== false){
-                this.setState({
-                    isLoggedin: false
-                })
-            }
+        .catch(_=>{
+            this.setState({
+                isLoggedIn: false,
+                isLoaded: true
+            })
         })
     }
 
@@ -51,42 +49,63 @@ class Cart extends React.Component{
         this.getLoginStatus();
     }
 
-    handleChangeItem(){
+    handleChangeItem=()=>{
         this.getCart();
     }
 
+
+    handleLogout=()=>{
+        axios.delete('/api/sessions')
+        .then(response=>{
+            this.getCart();
+            this.getLoginStatus();
+        })
+        .catch(_=>{
+            this.getCart();
+            this.getLoginStatus();
+        })
+    }
+
+
     render(){
 
-        let amount = 0;
-        this.state.cart.forEach(cartItem=>{
-            amount += cartItem.quantity*cartItem.price;
-        })
-
-
-        return(
-            <React.Fragment>
-                <Navbar cartCount={this.state.cartCount}/>
-                {
-                    this.state.cartCount>0?
-                    <div>
+        if(this.state.isLoaded){
+            let amount = 0;
+            this.state.cart.forEach(cartItem=>{
+                amount += cartItem.quantity*cartItem.price;
+            })
+        
+            return(
+                <React.Fragment>
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />
+                    {
+                        this.state.cartCount>0?
                         <div>
-                            {
-                                this.state.cart.map(cartItem=>{
-                                    return <CartItem item={cartItem} handleChangeItem={this.handleChangeItem} />
-                                })
-                            }
+                            <div>
+                                {
+                                    this.state.cart.map(cartItem=>{
+                                        return <div key={cartItem.productId}>
+                                            <CartItem item={cartItem} key={cartItem.productId} handleChangeItem={this.handleChangeItem}/>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                            <div>
+                                <p>Cart Value: Rs {amount}</p>
+                            </div>
+                            <button><Link to="/checkout">Proceed to Checkout</Link></button>
                         </div>
-                        <div>
-                            <p>Cart Value: Rs {amount}</p>
-                        </div>
-                        <button><Link to="/checkout">Proceed to Checkout</Link></button>
-                    </div>
-                    :
-                    <p>Your Cart is Empty</p>
-                }
-                
-            </React.Fragment>
-        )
+                        :
+                        <p>Your Cart is Empty</p>
+                    }
+
+                </React.Fragment>
+            )
+        }else{
+            return ''
+        }
+
+        
     }
 }
 
