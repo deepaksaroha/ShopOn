@@ -53,12 +53,13 @@ router.post('/', (req, res) => {
             if(gender !== undefined) userObject.gender = gender;
 
             const user = new User(userObject);
+
             user.save()
             .then(() => {
                 res.status(201).send({ id: userCredential.id });
             })
             .catch(error=>{
-                throw new Error();
+                res.status(500).send({ error: "Internal Server Error" });
             });
         });
     }).catch(() => {
