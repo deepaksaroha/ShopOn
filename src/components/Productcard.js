@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom'
 
 function ProductCard(props){
 
-
     function handleAddToCart(){
-        axios.put('https://localhot:4000/api/users/cart', 
+        axios.put('/api/users/cart',
             {
-                data: {
-                    productId: props.productId,
-                    name: props.name,
-                    quantity: 1,
-                    price: props.price
-                }
+                productId: props.productId,
+                name: props.name,
+                quantity: 1,
+                price: props.price
             }
         )
         .then(response=>{
@@ -25,18 +22,16 @@ function ProductCard(props){
     }
 
     function handleBuy(){
-        axios.put('https://localhot:4000/api/users/cart',
+        axios.put('/api/users/cart',
             {
-                data: {
-                    productId: props.productId,
-                    name: props.name,
-                    quantity: 1,
-                    price: props.price
-                }
+                productId: props.productId,
+                name: props.name,
+                quantity: 1,
+                price: props.price
             }
         )
         .then(response=>{
-            props.history.push('/cart');
+            props.handleBuy();
         })
         .catch(error=>{
             console.log(error.error);
@@ -48,7 +43,7 @@ function ProductCard(props){
     return <div>
         <div id={props.productId}>
             <img src="" alt=""/>
-            <p>{props.name}</p>
+            <p><Link to={'/products/'+props.productId}>{props.name}</Link></p>
             <p>{props.price}</p>
             {
                 props.inCart?
