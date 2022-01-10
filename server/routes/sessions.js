@@ -8,11 +8,12 @@ const User = require('../models/user')
 
 
 //user login status
-router.get('/', auth.authenticate);
+router.get('/', auth.authenticate, (req, res)=>{
+    res.status(200).send({mesaage: 'LogedIn user'})
+});
 
 //user login
 router.post('/', (req, res) => {
-    console.log(req.body);
     if (!req.body) {
         res.status(400).send({error: "Email and Password not present in request"});
         return;
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
     const cartArray = req.session.cart;
         
 
-    UserCredential.findOne({ email })
+    UserCredential.findOne({ email: email })
     .then(user => {
         if (!user) {
             res.status(400).send({error: "User not signed up"});
@@ -65,7 +66,7 @@ router.post('/', (req, res) => {
 
 
 //user logout
-router.delete('/me', (req, res) => {
+router.delete('/', (req, res) => {
     delete req.session.userId;
     res.status(204).send();
 });
