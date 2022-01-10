@@ -5,19 +5,12 @@ const Product = require('../models/product')
 //get products
 router.get('/', (req, res, next)=>{
     let searchObject = {};
-
-    console.log(req.query.searchWord)
-
-    const reg = new RegExp(req.query.searchWord);
-    console.log(reg);
     
-    if(req.query.searchText) { searchObject.name = {$regex: new RegExp(req.query.searchText), $options: 'i'} }
-    if(req.query.category) { searchObject.categories = req.query.category }
+    if(req.query.searchWord) { searchObject.name = {$regex: new RegExp(req.query.searchWord.split(" ").join("")), $options: 'i'} }
+    if(req.query.category) { searchObject.categories = new RegExp(`${req.query.category.split(" ").join("")}`, 'i') }
     if(req.query.priceFrom && req.query.priceTo) { searchObject.price = { $gte: req.query.priceFrom, $lte: req.query.priceTo } }
-    if(req.query.color) { searchObject['specification.color'] = req.query.color }
-
-    console.log(searchObject);
-
+    if(req.query.color) { searchObject['specification.color'] = req.query.color.split(" ").join("") }
+    
     Product.find(searchObject)
     .then(products=>{
         res.status(200).send({products: products});
