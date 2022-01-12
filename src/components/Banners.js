@@ -28,7 +28,7 @@ function Banner(props){
 
     return (
         <React.Fragment>
-            <img src='../images/banner1.png' alt="img" style={{width: '100vw', height: '50vh'}}/>
+            <img src={banners[count]} alt="img" style={{width: '100vw', height: '50vh'}}/>
             <button onClick={changeImageN}>previous</button>
             <button onClick={changeImageP}>next</button>
         </React.Fragment>
