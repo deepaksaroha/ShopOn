@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import Categories from './Categories'
 // import Recommendations from './Recommendations'
-// import Banners from './Banners'
+import Banners from './Banners'
 import axios from 'axios'
 
 class Homepage extends React.Component{
@@ -71,7 +71,7 @@ class Homepage extends React.Component{
                 <React.Fragment>
                     <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />
                     <Categories />
-                    {/* <Banners /> */}
+                    <Banners />
                     {/* <Recommendations /> */}
                 </React.Fragment>
             )
