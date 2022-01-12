@@ -4,6 +4,7 @@ import ProductCard from './Productcard'
 import Navbar from './Navbar';
 import Sort from './Sort';
 import sort from './SortFunction';
+import Categories from './Categories';
 
 class Products extends React.Component{
     constructor(props){
@@ -61,7 +62,8 @@ class Products extends React.Component{
         if(prevPros === undefined){
             return false;
         }
-        if(prevPros.match.params.searchText !== this.props.match.params.searchText){
+        if(prevPros.match.params.searchText !== this.props.match.params.searchText 
+            || prevPros.match.params.category !== this.props.match.params.category){
             this.getProductsData();
         }
     }
@@ -122,6 +124,7 @@ class Products extends React.Component{
         return(
             <React.Fragment>
                 <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount}/>
+                <Categories />
                 <Sort handleChangeSort={this.handleChangeSort} />
                 {
                     products.map(product=>{
