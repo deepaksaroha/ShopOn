@@ -5,6 +5,7 @@ import Navbar from './Navbar'
 import paymentHandlers from './paymentHandlers';
 import onOrderCreateFailure from './OrderCreateFailure'
 import { initiatePayment } from './Payment'
+import '../css/Checkout.css'
 
 class Checkout extends React.Component{
     constructor(props){
@@ -96,12 +97,12 @@ class Checkout extends React.Component{
                                     })
                                 }
                             </div>
-                            <div>
+                            <div className="checkout-box">
                                 <p>Cart Value: Rs {totalAmount}</p>
                                 <p>Delivery Charge: Rs 50</p>
                                 <p>Total Amount: Rs {totalAmount+50}</p>
+                                <button onClick={this.handleBuy}>Buy</button>
                             </div>
-                            <button onClick={this.handleBuy}>Buy</button>
                         </div>
                         :
                         <p>Your Cart is Empty</p>
