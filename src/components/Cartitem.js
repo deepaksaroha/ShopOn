@@ -47,17 +47,20 @@ class CartItem extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="cartitem-outer-box">
-                    <img src="" alt="" />
-                    <p>{item.name}</p>
-                    <p>
-                        <button onClick={this.handleMinus}>-</button>
-                        {item.quantity}
-                        <button onClick={this.handlePlus}>+</button>
-                    </p>
-                    <p>{item.price}</p>
-                    <button onClick={this.handleDelete}>Delete</button>
-                </div>
+                <tr>
+                    <td><img src="" alt="" /></td>
+                    <td><p>{item.name}</p></td>
+                    <td>
+                        <p>
+                            <button onClick={this.handleMinus}>-</button>
+                            {item.quantity}
+                            <button onClick={this.handlePlus}>+</button>
+                        </p>
+                    </td>
+                    <td><p>{item.price}</p></td>
+                    <td><button onClick={this.handleDelete}>Delete</button></td>
+                </tr>
+
             </React.Fragment>
         )
     }
