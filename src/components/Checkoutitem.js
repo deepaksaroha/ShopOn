@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/Checkoutitem.css'
 
 class Checkoutitem extends React.Component {
     constructor(props){
@@ -22,12 +23,12 @@ class Checkoutitem extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <div>
-                    <img src="" alt="" />
-                    <p>{this.state.name}</p>
-                    <p>{this.state.quantity}</p>
-                    <p>{this.state.price * this.state.quantity}</p>                    
-                </div>
+                <tr>
+                    <td><img src="" alt="" /></td>
+                    <td><p>{this.state.name}</p></td>
+                    <td><p>{this.state.quantity}</p></td>
+                    <td><p>{this.state.price * this.state.quantity}</p></td>                    
+                </tr>
             </React.Fragment>
         )
     }
