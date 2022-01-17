@@ -3,6 +3,7 @@ import React from 'react';
 import CartItem  from './Cartitem';
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router-dom'
+import '../css/Cart.css'
 
 class Cart extends React.Component{
     constructor(props){
@@ -90,10 +91,10 @@ class Cart extends React.Component{
                                     })
                                 }
                             </div>
-                            <div>
+                            <div id="proceed-box">
                                 <p>Cart Value: Rs {amount}</p>
+                                <button><Link to="/checkout">Proceed to Checkout</Link></button>
                             </div>
-                            <button><Link to="/checkout">Proceed to Checkout</Link></button>
                         </div>
                         :
                         <p>Your Cart is Empty</p>
@@ -102,7 +103,7 @@ class Cart extends React.Component{
                 </React.Fragment>
             )
         }else{
-            return ''
+            return null
         }
 
         
