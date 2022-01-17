@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import '../css/Cartitem.css'
 
 class CartItem extends React.Component {
 
@@ -46,12 +47,14 @@ class CartItem extends React.Component {
 
         return (
             <React.Fragment>
-                <div>
+                <div className="cartitem-outer-box">
                     <img src="" alt="" />
                     <p>{item.name}</p>
-                    <button onClick={this.handleMinus}>-</button>
-                    <p>{item.quantity}</p>
-                    <button onClick={this.handlePlus}>+</button>
+                    <p>
+                        <button onClick={this.handleMinus}>-</button>
+                        {item.quantity}
+                        <button onClick={this.handlePlus}>+</button>
+                    </p>
                     <p>{item.price}</p>
                     <button onClick={this.handleDelete}>Delete</button>
                 </div>
