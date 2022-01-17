@@ -1,0 +1,10 @@
+.plp-main{
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.list-outer-box{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Sort from './Sort';
 import sort from './SortFunction';
 import Categories from './Categories';
+import '../css/ProductList.css';
 
 class Products extends React.Component{
     constructor(props){
@@ -121,26 +122,36 @@ class Products extends React.Component{
         
         const products = sort(this.state.products, this.state.sortOrder);
 
+        if(!this.state.isLoaded){
+            return null;
+        }else{
         return(
             <React.Fragment>
                 <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount}/>
                 <Categories />
-                <Sort handleChangeSort={this.handleChangeSort} />
-                {
-                    products.map(product=>{
-                        let inCart = false;
-                        cartProductIds.forEach(id=>{
-                            if(id === product.productId){
-                                inCart = true
-                            }
-                        })
-                        return <div key={product.productId}>
-                            <ProductCard {...product} inCart={inCart} handleAddProduct={this.handleAddProduct} handleBuy={this.handleBuy} />
-                        </div>
-                    })
-                }
+                <div className="plp-main">
+                    <div className="sortfilter-outer-box">
+                        <Sort handleChangeSort={this.handleChangeSort} />
+                    </div>
+                    <div className="list-outer-box">
+                        {
+                            products.map(product=>{
+                                let inCart = false;
+                                cartProductIds.forEach(id=>{
+                                    if(id === product.productId){
+                                        inCart = true
+                                    }
+                                })
+                                return <div key={product.productId}>
+                                    <ProductCard {...product} inCart={inCart} handleAddProduct={this.handleAddProduct} handleBuy={this.handleBuy} />
+                                </div>
+                            })
+                        }
+                    </div>
+                </div>
             </React.Fragment>
         )
+        }
     }
 
 }
