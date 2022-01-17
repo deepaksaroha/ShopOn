@@ -1,9 +1,10 @@
 import React from 'react'
 
+import '../css/Footer.css'
+
 function Footer(){
     return (
         <React.Fragment>
-            <div style={{padding: '40px+1em'}}></div>
             <div className="footer">
                 Developed by : Deepak, &nbsp;
                 {/* <span style={{color: 'red'}}>&#10084;</span> */}
