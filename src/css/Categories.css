@@ -1,0 +1,14 @@
+.categories-outer-box{
+    display: flex;
+    justify-content: space-around;
+}
+
+.subcategories-box{
+    display: none;
+    position: absolute;
+}
+
+.category:hover>.subcategories-box {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { Link } from 'react-router-dom';
+import '../css/Categories.css'
 
 class Categories extends React.Component{
     constructor(props){
@@ -27,12 +28,12 @@ class Categories extends React.Component{
 
         return(
             <React.Fragment>
-                <div>
+                <div className="categories-outer-box">
                     {
                         this.state.categories.map(category=>{
-                            return <div key={category.categoryId}>
+                            return <div className="category" key={category.categoryId}>
                                 <Link to={"/category/"+category.name}>{category.name}</Link>
-                                <div>
+                                <div className="subcategories-box">
                                     {
                                         category.subcategories.map(subcategory=>{
                                             return <Link to={"/category/"+subcategory} key={subcategory}>{subcategory}</Link>
