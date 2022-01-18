@@ -89,13 +89,17 @@ class Checkout extends React.Component{
                     <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />
                     {
                         this.state.cart.length>0?
-                        <div>
+                        <div className="checkout-main-outerbox">
                             <div>
-                                {
-                                    this.state.cart.map(cartItem=>{
-                                        return <Checkoutitem item={cartItem} />
-                                    })
-                                }
+                                <table>
+                                    <tbody>
+                                        {
+                                            this.state.cart.map(cartItem=>{
+                                                return <tr key={cartItem._id}><Checkoutitem item={cartItem} /></tr>
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                             <div className="checkout-box">
                                 <p>Cart Value: Rs {totalAmount}</p>

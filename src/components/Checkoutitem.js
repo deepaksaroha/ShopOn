@@ -23,12 +23,10 @@ class Checkoutitem extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <tr>
-                    <td><img src="" alt="" /></td>
-                    <td><p>{this.state.name}</p></td>
-                    <td><p>{this.state.quantity}</p></td>
-                    <td><p>{this.state.price * this.state.quantity}</p></td>                    
-                </tr>
+                <td><img src="" alt="" /></td>
+                <td><p>{this.state.name}</p></td>
+                <td><p>{this.state.quantity}</p></td>
+                <td><p>{this.state.price * this.state.quantity}</p></td>
             </React.Fragment>
         )
     }

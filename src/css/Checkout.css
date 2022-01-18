@@ -1,3 +1,8 @@
 .checkout-box{
     text-align: right;
 }
+
+.checkout-main-outerbox{
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+}
