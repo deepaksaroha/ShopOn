@@ -12,7 +12,7 @@ class ProductDescription extends React.Component{
             cartCount: 0,
             productData: {},
             cart: [],
-            quantity: 0
+            quantity: 1
         }
     }
 
@@ -129,7 +129,7 @@ class ProductDescription extends React.Component{
                     <p>{productData.price}</p>
                     <label>Units:</label>
                     <select name="quantity" onChange={this.handleChange} value={this.state.quantity}>
-                        <option htmlFor="quantity" value="1">1</option>
+                        <option htmlFor="quantity" value="1" defaultValue>1</option>
                         <option htmlFor="quantity" value="2">2</option>
                         <option htmlFor="quantity" value="3">3</option>
                         <option htmlFor="quantity" value="4">4</option>

@@ -25,7 +25,7 @@ router.put('/', (req, res, next)=>{
     const { productId, name, quantity, price } = req.body;
 
     if(req.session.userId === undefined){
-        req.session.cart.push({ productId, name, quantity, price });
+        req.session.cart.push({ productId, name, quantity: parseInt(quantity), price });
         res.status(200).send({message: 'Item added to cart'});
         return;
     }
@@ -63,14 +63,15 @@ router.patch('/', (req, res, next)=>{
         if(req.session.userId === undefined){
             const cart = req.session.cart;
             for(let index in cart){
+                console.log(cart, cart[index]);
                 let item = cart[index];
                 if(item.productId === productId){
                     if(incValue < 0){
                         if(item.quantity > 1){
-                            item.quantity = item.quantity+incValue;
+                            cart[index].quantity = item.quantity+incValue;
                         }
                     }else{
-                        item.quantity = item.quantity+incValue;
+                        cart[index].quantity = item.quantity+incValue;
                     }
                     res.status(200).send({message: 'Quantity Incremented/Decremented'});
                     return;
