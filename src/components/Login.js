@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import Navbar from './Navbar'
+import '../css/Login.css'
 
 class Login extends React.Component {
     constructor(props){
@@ -115,14 +116,16 @@ class Login extends React.Component {
             return (
                 <React.Fragment>
                     <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.state.handleLogout} cartCount={this.state.cartCount}/>
-                    <form>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder="email" />
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" name="password" password={this.state.password} onChange={this.handleChange} placeholder="password" />
-                        <button onClick={this.handleSubmit}>Login</button>
-                    </form>
-                    <p>{this.state.error}</p>
+                    <div className="login-form-box">
+                        <form>
+                            <div><label htmlFor="email">Email:</label></div>
+                            <div><input type="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder="email" /></div>
+                            <div><label htmlFor="password">Password:</label></div>
+                            <div><input type="password" name="password" password={this.state.password} onChange={this.handleChange} placeholder="password" /></div>
+                            <div><button onClick={this.handleSubmit}>Login</button></div>
+                        </form>
+                        <p>{this.state.error}</p>
+                    </div>
                 </React.Fragment>
             )
         }else{

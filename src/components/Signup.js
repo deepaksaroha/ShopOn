@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import Navbar from './Navbar';
+import '../css/Signup.css'
 
 class Signup extends React.Component{
     constructor(props){
@@ -115,17 +116,19 @@ class Signup extends React.Component{
             return(
                 <React.Fragment>
                     <Navbar loginStatus={false} handleLogout={()=>{}} cartCount={this.state.cartCount}/>
-                    <form>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" />
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" name='password' value={this.state.password} onChange={this.handleChange} placeholder="password" />
-                        <label htmlFor="confirm-password">Confirm Password:</label>
-                        <input type="password" id="confirm-password" name='cnfPassword' value={this.state.cnfPassword} onChange={this.handleChange} placeholder="Re-enter password" />
-                        <button onClick={this.handleSubmit}>Signup</button>
-                    </form>
-                    <p>{this.state.error}</p>
-                    <p>{this.state.successMsg} {this.state.successMsg !== ''?<a href='/login'>Login</a>:''}</p>
+                    <div className="signup-box">
+                        <form>
+                            <div><label htmlFor="email">Email:</label></div>
+                            <div><input type="email" id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" /></div>
+                            <div><label htmlFor="password">Password:</label></div>
+                            <div><input type="password" id="password" name='password' value={this.state.password} onChange={this.handleChange} placeholder="password" /></div>
+                            <div><label htmlFor="confirm-password">Confirm Password:</label></div>
+                            <div><input type="password" id="confirm-password" name='cnfPassword' value={this.state.cnfPassword} onChange={this.handleChange} placeholder="Re-enter password" /></div>
+                            <div><button onClick={this.handleSubmit}>Signup</button></div>
+                        </form>
+                        <p>{this.state.error}</p>
+                        <p>{this.state.successMsg} {this.state.successMsg !== ''?<a href='/login'>Login</a>:''}</p>
+                    </div>
                 </React.Fragment>
             )
         }else{
