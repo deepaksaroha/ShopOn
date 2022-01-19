@@ -4,4 +4,8 @@
     bottom: 0;
     width: 100%;
     padding: 10px;
+    background-color: rgb(29, 29, 29);
+    color: white;
+    padding: 1.4em;
+    font-size: 0.8em;
 }
