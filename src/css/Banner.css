@@ -1,0 +1,22 @@
+.btnbox{
+    position: relative;
+}
+.ban-btn{
+    border: none;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    opacity: 0.4;
+    position: absolute;
+    top: 50%;
+    font-weight: 900;
+    font-size: large;
+}
+
+.btn2{
+    right: 0%;
+}
+
+.btn1{
+    left: 0%;
+}
