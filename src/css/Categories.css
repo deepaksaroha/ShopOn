@@ -1,6 +1,19 @@
 .categories-outer-box{
     display: flex;
     justify-content: space-around;
+    background-color: rgb(177, 216, 221);
+}
+
+.category-link{
+    padding: 0.5em;
+}
+
+.category{
+    box-sizing: border-box;
+}
+
+.category-link>a{
+    color: rgb(37, 37, 37);
 }
 
 .subcategories-box{
@@ -8,7 +21,23 @@
     position: absolute;
 }
 
+.category:hover{
+    background-color: rgb(243, 243, 243);
+    box-sizing: content-box;
+}
+
 .category:hover>.subcategories-box {
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    padding: 5px;
+}
+
+.subcategories-box{
+    background-color: rgb(243, 243, 243);
+    font-size: 0.8em;
+}
+.subcategories-box>a{
+    padding: 5px;
+    color: rgb(78, 78, 78);
 }

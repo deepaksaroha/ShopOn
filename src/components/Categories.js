@@ -32,7 +32,7 @@ class Categories extends React.Component{
                     {
                         this.state.categories.map(category=>{
                             return <div className="category" key={category.categoryId}>
-                                <Link to={"/category/"+category.name}>{category.name}</Link>
+                                <div className="category-link"><Link to={"/category/"+category.name}>{category.name}</Link></div>
                                 <div className="subcategories-box">
                                     {
                                         category.subcategories.map(subcategory=>{
