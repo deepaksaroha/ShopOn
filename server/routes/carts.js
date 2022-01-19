@@ -63,7 +63,6 @@ router.patch('/', (req, res, next)=>{
         if(req.session.userId === undefined){
             const cart = req.session.cart;
             for(let index in cart){
-                console.log(cart, cart[index]);
                 let item = cart[index];
                 if(item.productId === productId){
                     if(incValue < 0){

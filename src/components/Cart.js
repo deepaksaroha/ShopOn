@@ -86,7 +86,7 @@ class Cart extends React.Component{
                                 <table><tbody>
                                 {
                                     this.state.cart.map(cartItem=>{
-                                        return <tr key={cartItem._id}>
+                                        return <tr key={cartItem.productId}>
                                             <CartItem item={cartItem} key={cartItem.productId} handleChangeItem={this.handleChangeItem}/>
                                         </tr>
                                     })
