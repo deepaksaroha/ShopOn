@@ -6,13 +6,22 @@
 .product-card-box{
     height: fit-content;
     width: 250px;
-    border: 1px solid black;
     position: relative;
 }
 
 .card-img{
     width: 100%;
     height: 200px;
+    display: block;
+}
+
+.product-card-box p{
+    margin: 0;
+}
+
+.card-details-box{
+    background-color: white;
+    padding: 5px;
 }
 
 .card-product-title{
