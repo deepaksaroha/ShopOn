@@ -7,7 +7,9 @@
     height: fit-content;
     width: 250px;
     position: relative;
+    font-family: "Nunito Sans",sans-serif;
 }
+
 
 .card-img{
     width: 100%;
@@ -16,12 +18,14 @@
 }
 
 .product-card-box p{
-    margin: 0;
+    margin: 5px;
 }
 
 .card-details-box{
-    background-color: white;
     padding: 5px;
+    border-left: 1px solid rgb(202, 202, 202);
+    border-right: 1px solid rgb(202, 202, 202);
+    border-bottom: 1px solid rgb(202, 202, 202);
 }
 
 .card-product-title{
@@ -33,4 +37,31 @@
 
 .card-price{
     font-size: 14px;
+    font-weight: bold;
+}
+
+.card-btns-box>button{
+    border: none;
+    border-radius: 2px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.card-btns-box img{
+    height: 1em;
+    width: 1em;
+}
+
+.buy-btn{
+    float: right;
+    box-sizing: border-box;
+    background-color: #ff7777;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.addcart-btn{
+    box-sizing: border-box;
+    vertical-align: bottom;
+    background-color: #414141;
+    color: rgba(255, 255, 255, 0.945);
 }
