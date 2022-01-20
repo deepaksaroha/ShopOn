@@ -43,22 +43,22 @@ function ProductCard(props){
 
     return <div>
         <div className="product-card-box" id={props.productId}>
-            <img className="card-img" src="../images/banner2.png" alt=""/>
+            <div className="card-img-box"><img className="card-img" src="../images/banner2.png" alt=""/></div>
             <div className="card-details-box">
                 <p className="card-product-title"><Link to={'/products/'+props.productId}>{props.name}</Link></p>
                 <p className="card-price">&#8377; {props.price}</p>
-                <div className="card-btns">
+                <div className="card-btns-box">
                     {
                         props.inCart?
-                        <button><Link to="/cart">Add to Cart</Link></button>
+                        <button className="addcart-btn"><Link to="/cart">Add to Cart</Link></button>
                         :
-                        <button onClick={handleAddToCart}>Add to Cart</button>
+                        <button className="addcart-btn" onClick={handleAddToCart}>Add to Cart</button>
                     }
                     {
                         props.inCart?
-                        <button><Link to="/cart">Buy Now</Link></button>
+                        <button className="buy-btn"><Link to="/cart">Buy Now</Link></button>
                         :
-                        <button onClick={handleBuy}>Buy Now</button>
+                        <button className="buy-btn" onClick={handleBuy}>Buy Now</button>
                     }
                 </div>
             </div>
