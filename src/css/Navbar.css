@@ -1,13 +1,13 @@
 body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Nunito Sans",sans-serif;
 }
 .navbar{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 0 20px;
-    background-color: rgb(17, 116, 155);
     padding: 20px;
+    box-shadow: 0 0 5px 2px rgb(192, 192, 192);
 }
 
 .navbar>*{
@@ -15,6 +15,6 @@ body{
 }
 
 .navbar *{
-    color: white;
+    color: rgb(110, 110, 110);
     text-decoration: none;
 }
