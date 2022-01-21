@@ -111,8 +111,12 @@ router.put('/:id', auth.authenticate, (req, res) => {
     }
     const generated_signature = crypto.createHmac('sha256', secret).update(orderId + "|" + razorpay_payment_id).digest('hex');
     if (generated_signature === razorpay_signature) {
-        Order.updateOne({ id: orderId }, { $set: { status: 'Completed', razorpay_payment_id, razorpay_order_id, razorpay_signature }}).then(() => {
+        Order.updateOne({ id: orderId }, { $set: { status: 'Completed', razorpay_payment_id, razorpay_order_id, razorpay_signature }})
+        .then(() => {
             res.send(204).send();
+        })
+        .catch(()=>{
+            res.status(500).send({error: 'internal server error'});
         });
     } else {
         res.status(400).send({ error: 'Signature validation failed' });

@@ -61,7 +61,10 @@ router.post('/', (req, res) => {
             .catch(error=>{
                 res.status(500).send({ error: "Internal Server Error" });
             });
-        });
+        })
+        .catch(error=>{
+            res.status(500).send({ error: "Internal Server Error" });
+        });;
     }).catch(() => {
         res.status(500).send({ error: "Internal Server Error" });
     });
