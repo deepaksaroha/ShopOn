@@ -7,22 +7,14 @@ function Banner(props){
 
     const banners = getBannerImgURLs();
 
-    function changeImage(val){
-        setCount(prevCount=>{
-            if(prevCount-1<0){
-                return banners.length - val*((prevCount + val)%banners.length);
-            }else{
-                return (prevCount + val)%banners.length;
-            }
-        });
-    }
-
+    setTimeout(()=>{
+        setCount((count + 1)%3);
+    }, 4000);
+    
     return (
         <React.Fragment>
             <div className="btnbox">
                 <img src={banners[count]} alt="img" style={{width: '100vw', height: '50vh'}}/>
-                <button className="ban-btn btn1" onClick={()=>changeImage(-1)}>&lt;</button>
-                <button className="ban-btn btn2" onClick={()=>changeImage(+1)}>&gt;</button>
             </div>
         </React.Fragment>
     )
