@@ -8,20 +8,20 @@ exports.connect = (dbConfig) => {
     try {
 
         const {host, username, password, database} = dbConfig;
-        // const {host, database} = dbConfig;
+        // const {host, database} = dbConfig;s
 
         let absoluteHostName = host;
         
         // const mongoUri = `mongodb://${absoluteHostName}/${database}`;
         // const mongoUri = `mongodb://localhost/test2`;
         
-        // if (username) {
-        //     if (password !== undefined) {
-        //         absoluteHostName = `${username}:${password}@${absoluteHostName}`;
-        //     } else {
-        //         absoluteHostName = `${username}@${absoluteHostName}`;
-        //     }
-        // }
+        if (username) {
+            if (password !== undefined) {
+                absoluteHostName = `${username}:${password}@${absoluteHostName}`;
+            } else {
+                absoluteHostName = `${username}@${absoluteHostName}`;
+            }
+        }
 
         const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;
 
