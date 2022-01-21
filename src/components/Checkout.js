@@ -58,9 +58,8 @@ class Checkout extends React.Component{
             this.getCart();
             this.getLoginStatus();
         })
-        .catch(_=>{
-            this.getCart();
-            this.getLoginStatus();
+        .catch(()=>{
+            console.log('please refresh')
         })
     }
 

@@ -73,6 +73,9 @@ class ProductDescription extends React.Component{
             this.getCartData();
             this.getLoginStatus();
         })
+        .catch(()=>{
+            console.log('something went wrong')
+        })
     }
 
     handleChange=(e)=>{

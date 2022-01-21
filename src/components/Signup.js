@@ -102,7 +102,7 @@ class Signup extends React.Component{
             })
         })
         .catch(error=>{
-            console.log('cart fetch no')
+            console.log('cart fetch not successful')
         })
     }
 

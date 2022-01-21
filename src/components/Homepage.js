@@ -26,7 +26,6 @@ class Homepage extends React.Component{
         })
         .catch(_=>{
             this.setState({
-                isLoggedIn: false,
                 isLoaded: true
             })
         })
@@ -40,7 +39,6 @@ class Homepage extends React.Component{
             })
         })
         .catch(error=>{
-            console.log(error);
             this.setState({
                 error: error
             })
@@ -61,6 +59,9 @@ class Homepage extends React.Component{
         .catch(_=>{
             this.getCartCount();
             this.getLoginStatus();
+        })
+        .catch(()=>{
+            console.log('something went wrong')
         })
     }
 

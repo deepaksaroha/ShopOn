@@ -9,6 +9,9 @@ const paymentHandlers = {
             if(res.ok){
                 window.location = `/orders/${options.id}`;
             }
+        })
+        .catch(()=>{
+            console.log('something went wrong');
         });
     },
     onDismiss: ()=>{},

@@ -87,7 +87,6 @@ class Login extends React.Component {
             })
         })
         .catch(error=>{
-            console.log(error);
             this.setState({
                 error: error
             })
@@ -108,6 +107,9 @@ class Login extends React.Component {
         .catch(_=>{
             this.getCartCount();
             this.getLoginStatus();
+        })
+        .catch(()=>{
+            console.log('something went wrong')
         })
     }
 
