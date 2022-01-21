@@ -8,7 +8,7 @@ function Banner(props){
     const banners = getBannerImgURLs();
 
     setTimeout(()=>{
-        setCount((count + 1)%3);
+        setCount((count + 1)%banners.length);
     }, 4000);
     
     return (
