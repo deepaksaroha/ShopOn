@@ -26,6 +26,7 @@ class Homepage extends React.Component{
         })
         .catch(_=>{
             this.setState({
+                isLoggedIn: false,
                 isLoaded: true
             })
         })
