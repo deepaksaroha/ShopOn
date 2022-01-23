@@ -11,11 +11,10 @@
     background-color: white;
 }
 
-
 .card-img{
-    width: 100%;
     height: 200px;
     display: block;
+    margin: 0 auto;
 }
 
 .product-card-box p{
@@ -56,7 +55,7 @@
 .buy-btn{
     float: right;
     box-sizing: border-box;
-    background-color: #ff7777;
+    background-color: #ceb52d;
     color: rgba(255, 255, 255, 0.87);
 }
 
