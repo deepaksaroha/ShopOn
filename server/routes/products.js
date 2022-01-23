@@ -7,7 +7,7 @@ router.get('/', (req, res, next)=>{
     let searchObject = {};
     
     if(req.query.searchText) { searchObject.name = {$regex: new RegExp(req.query.searchText.split(" ").join("")), $options: 'i'} }
-    if(req.query.category) { searchObject.categories = new RegExp(`${req.query.category.split(" ").join("")}`, 'i') }
+    if(req.query.category) { searchObject.categories ={$regex: new RegExp(`${req.query.category.split(" ").join("")}`, 'i') } }
     if(req.query.priceFrom && req.query.priceTo) { searchObject.price = { $gte: req.query.priceFrom, $lte: req.query.priceTo } }
     if(req.query.color) { searchObject['specification.color'] = req.query.color.split(" ").join("") }
     
