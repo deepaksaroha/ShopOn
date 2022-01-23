@@ -1,0 +1,20 @@
+.deals-outer-box{
+    margin: 50px;
+}
+
+.deals-box{
+    display: flex;
+    margin: 20px auto;
+    gap: 40px;
+    width: fit-content;
+}
+
+.deal-img-box{
+    height: 350px;
+    width: 350px;
+    text-align: center;
+}
+
+.deal-img-box>img{
+    height: 100%;
+}
