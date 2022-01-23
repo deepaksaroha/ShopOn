@@ -20,7 +20,7 @@ class AppRouter extends React.Component{
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/category/:category" component={Productlist} />
-                    <Route path="/search/:searchText" component={Productlist} />
+                    <Route path="/search" component={Productlist} />
                     <Route path="/products/:productId" component={ProductDescription} />
                     <Route path="/cart" component={Cart} />
                     <Route path="/checkout" component={Checkout} />

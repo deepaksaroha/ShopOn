@@ -21,12 +21,11 @@ class Products extends React.Component{
     }
 
     getProductsData=()=>{
-        let URLString = '/api/products?'
-        
-        if(this.props.match.params.searchText !== undefined){
-            URLString += 'searchWord='+this.props.match.params.searchText;
+        let URLString = '/api/products'
+        if(this.props.location.search !== undefined){
+            URLString += this.props.location.search;
         }else if(this.props.match.params.category !== undefined){
-            URLString += 'category='+this.props.match.params.category;
+            URLString += '?category='+this.props.match.params.category;
         }
        
         axios.get(URLString)
@@ -63,7 +62,7 @@ class Products extends React.Component{
         if(prevPros === undefined){
             return false;
         }
-        if(prevPros.match.params.searchText !== this.props.match.params.searchText 
+        if(prevPros.location.search !== this.props.location.search 
             || prevPros.match.params.category !== this.props.match.params.category){
             this.getProductsData();
         }
