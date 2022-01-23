@@ -28,7 +28,7 @@ class Navbar extends React.Component {
                     <Link to="/home">Home</Link>
                     <form action={this.state.searchText !== ""? "/search": "#"}>
                         <input id="navbar-srch-inputbox" type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} />
-                        <Link to={this.state.searchText !== '' ? "/search?searchText="+this.state.searchText: ''}><img className="all-img" src="../images/srch_b.svg" alt="search"/></Link>
+                        <button><img className="all-img" src="../images/srch_b.svg" alt="search"/></button>
                     </form>
                     <Link to="/cart">Cart({this.props.cartCount})</Link>
                     {
