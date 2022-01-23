@@ -43,7 +43,7 @@ function ProductCard(props){
 
     return <div>
         <div className="product-card-box" id={props.productId}>
-            <div className="card-img-box"><img className="card-img" src="../images/banner2.png" alt=""/></div>
+            <img className="card-img" src={`${props.images[0]}.jpg`} alt=""/>
             <div className="card-details-box">
                 <p className="card-product-title"><Link to={'/products/'+props.productId}>{props.name}</Link></p>
                 <p className="card-price">&#8377; {props.price}</p>
