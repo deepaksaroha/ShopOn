@@ -41,6 +41,7 @@ class Navbar extends React.Component {
                         </span>
                     }
                 </div>
+                <div id="navbar-margin-box"></div>
             </React.Fragment>
         )
     }
