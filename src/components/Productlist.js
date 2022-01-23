@@ -24,10 +24,13 @@ class Products extends React.Component{
         let URLString = '/api/products'
         if(this.props.location.search !== undefined){
             URLString += this.props.location.search;
-        }else if(this.props.match.params.category !== undefined){
+        }
+        if(this.props.match.params.category !== undefined){
             URLString += '?category='+this.props.match.params.category;
         }
-       
+        
+
+        console.log(URLString);
         axios.get(URLString)
         .then(response=>{
             this.setState({
