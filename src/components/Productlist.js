@@ -29,8 +29,6 @@ class Products extends React.Component{
             URLString += '?category='+this.props.match.params.category;
         }
         
-
-        console.log(URLString);
         axios.get(URLString)
         .then(response=>{
             this.setState({
