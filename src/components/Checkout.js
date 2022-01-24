@@ -106,7 +106,7 @@ class Checkout extends React.Component{
                                     <p>Delivery Charge: &#x20b9; {totalAmount>=500 ? 0: 50}</p>
                                     <hr/>
                                     <p>Total: Rs {totalAmount+(totalAmount>=500 ? 0: 50)}</p>
-                                    <button id="chkout-buy-btn" onClick={this.handleBuy}>Buy</button>
+                                    <button id="chkout-buy-btn" onClick={this.handleBuy}>Place Order</button>
                                 </div>
                             </div>
                         </div>
