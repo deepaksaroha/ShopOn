@@ -18,45 +18,36 @@ class Checkout extends React.Component{
         }
     }
 
-    getCart=()=>{
-        axios.get('/api/users/cart')
-        .then(response=>{
+    componentDidMount(){
+        Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
             this.setState({
-                cart: response.data.cart,
-                cartCount: response.data.cart.length
+                cart: responses[0].data.cart,
+                cartCount: responses[0].data.cart.length,
+                isLoggedIn: responses[1].data.loginStatus,
+                isLoaded: true
             })
         })
         .catch(error=>{
-            console.log('Something went wrong')
+            console.log('something went wrong')
         })
-    }
-    
-    getLoginStatus=()=>{
-        axios.get('/api/sessions')
-        .then(response=>{
-            this.setState({
-                isLoggedIn: true,
-                isLoaded: true
-            })
-        })
-        .catch(_=>{
-            this.setState({
-                isLoggedIn: false,
-                isLoaded: true
-            })
-        })
-    }
-
-    componentDidMount(){
-        this.getCart();
-        this.getLoginStatus();
     }
 
     handleLogout=()=>{
         axios.delete('/api/sessions')
         .then(response=>{
-            this.getCart();
-            this.getLoginStatus();
+            Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+            .then(responses=>{
+                this.setState({
+                    cart: responses[0].data.cart,
+                    cartCount: responses[0].data.cart.length,
+                    isLoggedIn: responses[1].data.loginStatus,
+                    isLoaded: true
+                })
+            })
+            .catch(error=>{
+                console.log('something went wrong')
+            })
         })
         .catch(()=>{
             console.log('please refresh')
@@ -105,7 +96,7 @@ class Checkout extends React.Component{
                                     <p>Cart Value: &#x20b9; {totalAmount}</p>
                                     <p>Delivery Charge: &#x20b9; {totalAmount>=500 ? 0: 50}</p>
                                     <hr/>
-                                    <p>Total: Rs {totalAmount+(totalAmount>=500 ? 0: 50)}</p>
+                                    <p>Total: &#x20b9; {totalAmount+(totalAmount>=500 ? 0: 50)}</p>
                                     <button id="chkout-buy-btn" onClick={this.handleBuy}>Place Order</button>
                                 </div>
                             </div>

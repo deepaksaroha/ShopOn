@@ -4,29 +4,16 @@ import '../css/Cartitem.css'
 
 class CartItem extends React.Component {
 
-    handleMinus=()=>{
+    handleQunatityChange=(val)=>{
         axios.patch('/api/users/cart',{
             productId: this.props.item.productId,
-            incValue: -1
+            incValue: val
         })
         .then(response=>{
             this.props.handleChangeItem();
         })
         .catch(error=>{
             console.log(error.error);
-        })
-    }
-
-    handlePlus=()=>{
-        axios.patch('/api/users/cart',{
-            productId: this.props.item.productId,
-            incValue: 1
-        })
-        .then(response=>{
-            this.props.handleChangeItem()
-        })
-        .catch(error=>{
-            console.log(error.error)
         })
     }
 
@@ -51,9 +38,9 @@ class CartItem extends React.Component {
                 <td className="crt-row-dta"><p>{item.name}</p></td>
                 <td className="crt-row-dta">
                     <p>
-                        <button className="chng-btn" onClick={this.handleMinus}>-</button>
+                        <button className="chng-btn" onClick={()=>this.handleQunatityChange(-1)}>-</button>
                         {item.quantity}
-                        <button className="chng-btn" onClick={this.handlePlus}>+</button>
+                        <button className="chng-btn" onClick={()=>this.handleQunatityChange(1)}>+</button>
                     </p>
                 </td>
                 <td className="crt-row-dta"><p>&#8377;{item.price}</p></td>
