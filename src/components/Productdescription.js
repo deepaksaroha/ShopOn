@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar';
+import '../css/ProductDescription.css'
 
 class ProductDescription extends React.Component{
     constructor(props){
@@ -58,24 +59,52 @@ class ProductDescription extends React.Component{
     }
 
     componentDidMount(){
-        this.getProductData();
-        this.getCartData();
-        this.getLoginStatus();
+        // this.getProductData();
+        // this.getCartData();
+        // this.getLoginStatus();
+
+        Promise.all([axios.get('/api/products/'+this.props.match.params.productId),
+        axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
+            this.setState({
+                productData: responses[0].data.productData,
+                cart: responses[1].data.cart,
+                cartCount: responses[1].data.cart.length,
+                isLoggedIn: responses[2].data.logInStatus,
+                isLoaded: true
+            })
+        })
+        .catch(error=>{
+            console.log('some error occured');
+        })
     }
 
     handleLogout=()=>{
-        axios.delete('/api/sessions')
-        .then(response=>{
-            this.getCartData();
-            this.getLoginStatus();
+        // axios.delete('/api/sessions')
+        // .then(response=>{
+        //     this.getCartData();
+        //     this.getLoginStatus();
+        // })
+        // .catch(_=>{
+        //     this.getCartData();
+        //     this.getLoginStatus();
+        // })
+        // .catch(()=>{
+        //     console.log('something went wrong')
+        // })
+
+        Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
+            this.setState({
+                cart: responses[0].data.cart,
+                cartCount: responses[0].data.cart.length,
+                isLoggedIn: responses[1].data.logInStatus,
+            })
         })
-        .catch(_=>{
-            this.getCartData();
-            this.getLoginStatus();
+        .catch(error=>{
+            console.log('some error occured');
         })
-        .catch(()=>{
-            console.log('something went wrong')
-        })
+
     }
 
     handleChange=(e)=>{
@@ -123,33 +152,59 @@ class ProductDescription extends React.Component{
 
         const cartProductIds = this.state.cart.map(product=>product.productId)
         const productData = this.state.productData;
+        
         if(this.state.isLoaded){
             return(
                 <React.Fragment>
                     <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount}/>
-                    <img src="" alt="" />
-                    <p>{productData.name}</p>
-                    <p>{productData.price}</p>
-                    <label>Units:</label>
-                    <select name="quantity" onChange={this.handleChange} value={this.state.quantity}>
-                        <option htmlFor="quantity" value="1" defaultValue>1</option>
-                        <option htmlFor="quantity" value="2">2</option>
-                        <option htmlFor="quantity" value="3">3</option>
-                        <option htmlFor="quantity" value="4">4</option>
-                        <option htmlFor="quantity" value="5">5</option>
-                    </select>
-                    {
-                        cartProductIds.includes(productData.productId) ?
-                        <button><Link to="/cart">Add to Cart</Link></button>
-                        :
-                        <button onClick={this.handleAddToCart}>Add to Cart</button>
-                    }
-                    {
-                        cartProductIds.includes(productData.productId) ?
-                        <button><Link to="/cart">Buy Now</Link></button>
-                        :
-                        <button onClick={this.handleBuy}>Buy Now</button>
-                    }
+                    <div className="pro-desc-outer-box">
+                        <div className="pro-desc-img-box">
+                            <div className="pro-desc-disp-img1">
+                                <div id="pro-desc-disp-img"><img className="all-imgs" src={`${productData.images[0]}.jpg`} alt="img"/></div>
+                            </div>
+                            <div id="img-othrs" className="pro-desc-disp-img1">
+                                {
+                                    productData.images.map(img=>{
+                                        return <div key={img} className="pdtn">
+                                            <img className="all-imgs"src={`${img}.jpg`} alt="img" />
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className="pro-desc-det-box">
+                            <h2>{productData.name}</h2>
+                            <h4>Specifications</h4>
+                            <hr/>
+                            <ul>
+                                {productData.specification.map(spec=>{
+                                    return <li key={spec.propertyName}>{spec.propertyName}: {spec.propertyValue}</li>
+                                })}
+                            </ul>
+                            <h3>&#8377; {productData.price}</h3>
+                            <label>Units:</label>
+                            <select name="quantity" onChange={this.handleChange} value={this.state.quantity}>
+                                <option htmlFor="quantity" value="1" defaultValue>1</option>
+                                <option htmlFor="quantity" value="2">2</option>
+                                <option htmlFor="quantity" value="3">3</option>
+                                <option htmlFor="quantity" value="4">4</option>
+                                <option htmlFor="quantity" value="5">5</option>
+                            </select>
+                            {
+                                cartProductIds.includes(productData.productId) ?
+                                <button><Link to="/cart">Add to Cart</Link></button>
+                                :
+                                <button onClick={this.handleAddToCart}>Add to Cart</button>
+                            }
+                            {
+                                cartProductIds.includes(productData.productId) ?
+                                <button><Link to="/cart">Buy Now</Link></button>
+                                :
+                                <button onClick={this.handleBuy}>Buy Now</button>
+                            }
+                        </div>
+                    </div>
+                    
                 </React.Fragment>
             )
         }else{
