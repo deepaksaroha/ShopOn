@@ -47,17 +47,17 @@ class CartItem extends React.Component {
 
         return (
             <React.Fragment>
-                <td><img src="" alt="" /></td>
-                <td><p>{item.name}</p></td>
-                <td>
+                <td className="crt-row-dta"><div className="cart-img-bx"><img src={`../images/ID${item.productId}_1.jpg`} alt="" /></div></td>
+                <td className="crt-row-dta"><p>{item.name}</p></td>
+                <td className="crt-row-dta">
                     <p>
-                        <button onClick={this.handleMinus}>-</button>
+                        <button className="chng-btn" onClick={this.handleMinus}>-</button>
                         {item.quantity}
-                        <button onClick={this.handlePlus}>+</button>
+                        <button className="chng-btn" onClick={this.handlePlus}>+</button>
                     </p>
                 </td>
-                <td><p>{item.price}</p></td>
-                <td><button onClick={this.handleDelete}>Delete</button></td>
+                <td className="crt-row-dta"><p>&#8377;{item.price}</p></td>
+                <td className="crt-row-dta"><button className="dle-btn" onClick={this.handleDelete}>X</button></td>
             </React.Fragment>
         )
     }

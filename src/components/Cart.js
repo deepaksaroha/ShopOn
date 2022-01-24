@@ -82,11 +82,11 @@ class Cart extends React.Component{
                     {
                         this.state.cartCount>0?
                         <div>
-                            <div>
+                            <div className="cart-otr-bx">
                                 <table><tbody>
                                 {
                                     this.state.cart.map(cartItem=>{
-                                        return <tr key={cartItem.productId}>
+                                        return <tr className="crt-row" key={cartItem.productId}>
                                             <CartItem item={cartItem} key={cartItem.productId} handleChangeItem={this.handleChangeItem}/>
                                         </tr>
                                     })
@@ -95,7 +95,7 @@ class Cart extends React.Component{
                             </div>
                             <div id="proceed-box">
                                 <p>Cart Value: Rs {amount}</p>
-                                <button><Link to="/checkout">Proceed to Checkout</Link></button>
+                                <button id="chkout-btn"><Link to="/checkout">Proceed to Checkout</Link></button>
                             </div>
                         </div>
                         :
