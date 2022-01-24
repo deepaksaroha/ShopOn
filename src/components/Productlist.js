@@ -68,7 +68,7 @@ class Products extends React.Component{
                 products: responses[0].data.products,
                 cart: responses[1].data.cart,
                 cartCount: responses[1].data.cart.length,
-                isLoggedIn: responses[2].data.logInStatus,
+                isLoggedIn: responses[2].data.loginStatus,
                 isLoaded: true
             })
         })
