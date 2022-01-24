@@ -8,8 +8,12 @@ const User = require('../models/user')
 
 
 //user login status
-router.get('/', auth.authenticate, (req, res)=>{
-    res.status(200).send({mesaage: 'LogedIn user'})
+router.get('/', (req, res)=>{
+    if(req.session.userId === undefined){
+        res.status(200).send({logInStatus: false});
+        return;
+    }
+    res.status(200).send({logInStatus: true})
 });
 
 //user login
