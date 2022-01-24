@@ -173,35 +173,37 @@ class ProductDescription extends React.Component{
                             </div>
                         </div>
                         <div className="pro-desc-det-box">
-                            <h2>{productData.name}</h2>
-                            <h4>Specifications</h4>
+                            <h2 id="pro-desc-prod-name">{productData.name}</h2>
+                            <h4 id="spec-heading">Specifications</h4>
                             <hr/>
-                            <ul>
+                            <ul id="specs">
                                 {productData.specification.map(spec=>{
                                     return <li key={spec.propertyName}>{spec.propertyName}: {spec.propertyValue}</li>
                                 })}
                             </ul>
                             <h3>&#8377; {productData.price}</h3>
-                            <label>Units:</label>
-                            <select name="quantity" onChange={this.handleChange} value={this.state.quantity}>
+                            <label id="label">Units:</label>
+                            <select id="opt-slctr" name="quantity" onChange={this.handleChange} value={this.state.quantity}>
                                 <option htmlFor="quantity" value="1" defaultValue>1</option>
                                 <option htmlFor="quantity" value="2">2</option>
                                 <option htmlFor="quantity" value="3">3</option>
                                 <option htmlFor="quantity" value="4">4</option>
                                 <option htmlFor="quantity" value="5">5</option>
                             </select>
-                            {
-                                cartProductIds.includes(productData.productId) ?
-                                <button><Link to="/cart">Add to Cart</Link></button>
-                                :
-                                <button onClick={this.handleAddToCart}>Add to Cart</button>
-                            }
-                            {
-                                cartProductIds.includes(productData.productId) ?
-                                <button><Link to="/cart">Buy Now</Link></button>
-                                :
-                                <button onClick={this.handleBuy}>Buy Now</button>
-                            }
+                            <div className="des-btn-box">
+                                {
+                                    cartProductIds.includes(productData.productId) ?
+                                    <button className="prd-des-btn prd-dec-add-btn"><Link to="/cart">Add to Cart</Link></button>
+                                    :
+                                    <button className="prd-des-btn prd-dec-add-btn" onClick={this.handleAddToCart}>Add to Cart</button>
+                                }
+                                {
+                                    cartProductIds.includes(productData.productId) ?
+                                    <button className="prd-des-btn prd-dec-buy-btn"><Link to="/cart">Buy Now</Link></button>
+                                    :
+                                    <button className="prd-des-btn prd-dec-buy-btn" onClick={this.handleBuy}>Buy Now</button>
+                                }
+                            </div>
                         </div>
                     </div>
                     

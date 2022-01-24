@@ -1,26 +1,32 @@
+a{
+    text-decoration: none;
+    color: unset;
+}
+
 .pro-desc-outer-box{
     display: grid;
     grid-template-columns: 1fr 1fr; 
     margin: 50px 30px;
-    justify-items: center;
 }
 
 .pro-desc-img-box{
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin-right: 0;
+    margin-left: auto;
 }
 
 .pro-desc-disp-img1{
     padding: 30px 50px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid rgb(156, 156, 156);
 }
 
 #pro-desc-disp-img{
-    height: 500px;
-    width: 500px;
+    height: 450px;
+    width: 450px;
     display: inline-block;
-    border: 1px solid black;
 }
 
 #img-othrs{
@@ -30,9 +36,12 @@
 }
 
 .pdtn{
-    height: 100px;
-    width: 100px;
-    border: 1px solid black;
+    height: 80px;
+    width: 80px;
+}
+
+.pro-desc-det-box{
+    padding: 50px;  
 }
 
 .pro-desc-det-box>h4{
@@ -41,4 +50,49 @@
 
 .all-imgs{
     height: 100%;
+}
+
+#pro-desc-prod-name{
+    color: rgb(119, 119, 119);
+}
+
+#spec-heading{
+    color: rgb(80, 80, 80);
+}
+
+#specs{
+    color: rgb(58, 58, 58);
+}
+
+#opt-slctr{
+    padding: 5px 20px;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(53, 53, 53);
+    outline: none;
+    margin: 0 20px;
+}
+
+#label{
+    font-size: 24px;
+}
+
+.prd-des-btn{
+    margin-right: 30px;
+    padding: 10px 25px;
+    font-size: 20px;
+    border: none;
+    color: white;
+}
+
+.prd-dec-add-btn{
+    background-color: #414141;
+}
+
+.prd-dec-buy-btn{
+    background-color: #ceb52d;
+}
+
+.des-btn-box{
+    margin-top: 40px;
 }
