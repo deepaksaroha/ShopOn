@@ -21,12 +21,17 @@ class Checkout extends React.Component{
     componentDidMount(){
         Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
         .then(responses=>{
-            this.setState({
-                cart: responses[0].data.cart,
-                cartCount: responses[0].data.cart.length,
-                isLoggedIn: responses[1].data.loginStatus,
-                isLoaded: true
-            })
+
+            if(responses[1].data.loginStatus === false){
+                this.props.history.push('/login');
+            }else{
+                this.setState({
+                    cart: responses[0].data.cart,
+                    cartCount: responses[0].data.cart.length,
+                    isLoggedIn: responses[1].data.loginStatus,
+                    isLoaded: true
+                })
+            }
         })
         .catch(error=>{
             console.log('something went wrong')
@@ -54,10 +59,6 @@ class Checkout extends React.Component{
         })
     }
 
-    toLogin=()=>{
-        this.props.history.push('/login');
-    }
-
     handleBuy=()=>{
         initiatePayment(paymentHandlers, onOrderCreateFailure);
     }
@@ -65,14 +66,10 @@ class Checkout extends React.Component{
     render(){
         let totalAmount = 0;
         this.state.cart.forEach(item=>{
-            totalAmount += item.quantity*item.price
+            totalAmount += item.quantity*item.price;
         })
 
         if(this.state.isLoaded){
-            if(!this.state.isLoggedIn){
-                this.toLogin();
-            }
-    
     
             return(
                 <React.Fragment>
