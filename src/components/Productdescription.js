@@ -25,7 +25,7 @@ class ProductDescription extends React.Component{
                 productData: responses[0].data.productData,
                 cart: responses[1].data.cart,
                 cartCount: responses[1].data.cart.length,
-                isLoggedIn: responses[2].data.logInStatus,
+                isLoggedIn: responses[2].data.loginStatus,
                 isLoaded: true
             })
         })
