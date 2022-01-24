@@ -21,12 +21,14 @@ class Checkoutitem extends React.Component {
     }
 
     render(){
+        const item = this.props.item;
+
         return (
             <React.Fragment>
-                <td><img src="" alt="" /></td>
-                <td><p>{this.state.name}</p></td>
-                <td><p>{this.state.quantity}</p></td>
-                <td><p>{this.state.price * this.state.quantity}</p></td>
+                <td><img className="chkout-img" src={`../images/ID${item.productId}_1.jpg`} alt="" /></td>
+                <td><p>{item.name}</p></td>
+                <td><p>{item.quantity}</p></td>
+                <td><p>{item.price *item.quantity}</p></td>
             </React.Fragment>
         )
     }
