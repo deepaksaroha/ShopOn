@@ -10,10 +10,10 @@ const User = require('../models/user')
 //user login status
 router.get('/', (req, res)=>{
     if(req.session.userId === undefined){
-        res.status(200).send({logInStatus: false});
+        res.status(200).send({loginStatus: false});
         return;
     }
-    res.status(200).send({logInStatus: true})
+    res.status(200).send({loginStatus: true})
 });
 
 //user login
