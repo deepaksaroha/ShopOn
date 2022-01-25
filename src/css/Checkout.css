@@ -5,4 +5,28 @@
 .checkout-main-outerbox{
     display: grid;
     grid-template-columns: 7fr 3fr;
+    margin: 50px 30px;
+}
+
+.checkout-box{
+    text-align: left;
+}
+
+.checkout-box>div{
+    width: fit-content;
+    text-align: right;
+}
+
+.checkout-box>div:nth-child(2){
+    font-size: 0.4em;
+}
+
+#chkout-buy-btn{
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    width: 200px;
+    color: white;
+    background-color: rgb(255, 166, 0);
+    border-radius: 5px;
 }

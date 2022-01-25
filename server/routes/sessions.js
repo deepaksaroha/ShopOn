@@ -10,10 +10,10 @@ const User = require('../models/user')
 //user login status
 router.get('/', (req, res)=>{
     if(req.session.userId === undefined){
-        res.status(200).send({logInStatus: false});
+        res.status(200).send({loginStatus: false});
         return;
     }
-    res.status(200).send({logInStatus: true})
+    res.status(200).send({loginStatus: true})
 });
 
 //user login
@@ -53,7 +53,16 @@ router.post('/', (req, res) => {
         }
 
         req.session.userId = user.id;
-        return User.updateOne({ userId: req.session.userId }, { $push: { cart: { $each: cartArray } } })
+
+        cartArray.forEach(item => {
+            
+            User.updateOne({ userId: req.session.userId, "cart.productId": {$ne: item.productId} }, { $push: { cart: item } })
+            .then(()=>{})
+            .catch(error=>{
+                throw new Error();
+            })
+        });
+        // return User.updateOne({ userId: req.session.userId }, { $addToSet: { cart: { $each: cartArray } } })
         // res.status(204).send();
     })
     .then(()=>{

@@ -16,7 +16,22 @@ class Cart extends React.Component{
         }
     }
 
-    getCart=()=>{
+    componentDidMount(){
+        Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
+            this.setState({
+                cart: responses[0].data.cart,
+                cartCount: responses[0].data.cart.length,
+                isLoggedIn: responses[1].data.loginStatus,
+                isLoaded: true
+            })
+        })
+        .catch(error=>{
+            console.log('something went wrong')
+        })
+    }
+
+    handleChangeItem=()=>{
         axios.get('/api/users/cart')
         .then(response=>{
             this.setState({
@@ -28,42 +43,26 @@ class Cart extends React.Component{
             console.log('Something went wrong')
         })
     }
-    
-    getLoginStatus=()=>{
-        axios.get('/api/sessions')
-        .then(response=>{
-            this.setState({
-                isLoggedIn: true,
-                isLoaded: true
-            })
-        })
-        .catch(_=>{
-            this.setState({
-                isLoggedIn: false,
-                isLoaded: true
-            })
-        })
-    }
-
-    componentDidMount(){
-        this.getCart();
-        this.getLoginStatus();
-    }
-
-    handleChangeItem=()=>{
-        this.getCart();
-    }
 
 
     handleLogout=()=>{
         axios.delete('/api/sessions')
         .then(response=>{
-            this.getCart();
-            this.getLoginStatus();
+            Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+            .then(responses=>{
+                this.setState({
+                    cart: responses[0].data.cart,
+                    cartCount: responses[0].data.cart.length,
+                    isLoggedIn: responses[1].data.loginStatus,
+                    isLoaded: true
+                })
+            })
+            .catch(error=>{
+                console.log('something went wrong')
+            })
         })
-        .catch(_=>{
-            this.getCart();
-            this.getLoginStatus();
+        .catch(error=>{
+            console.log('something went wrong')
         })
     }
 
