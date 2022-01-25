@@ -17,6 +17,7 @@ body{
     align-items: center;
     z-index: 1;
     background-color: white;
+    box-sizing: border-box;
 }
 
 .navbar>*{
