@@ -17,6 +17,7 @@ body{
     align-items: center;
     z-index: 1;
     background-color: white;
+    box-sizing: border-box;
 }
 
 .navbar>*{
@@ -36,7 +37,7 @@ body{
 }
 
 #navbar-srch-inputbox:focus{
-    outline: 2px solid pink;
+    outline: 2px solid rgb(211, 183, 61);
 }
 
 .all-img{
@@ -45,7 +46,8 @@ body{
 
 .nb-acc-links{
     color: rgb(70, 204, 137);
-    margin: 0 20px;
+    padding: 5px 10px;
+    border: 1px solid rgb(70, 204, 137);
 }
 
 #nb-logout-btn{

@@ -35,7 +35,7 @@ class Navbar extends React.Component {
                         this.props.loginStatus ?
                         <button id="nb-logout-btn" onClick={this.handleLogout}>Logout</button>
                         :
-                        <span>
+                        <span >
                             <Link className="nb-acc-links" to="/login">Login</Link>
                             <Link className="nb-acc-links" to="/signup">Signup</Link>
                         </span>

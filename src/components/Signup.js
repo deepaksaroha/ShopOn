@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import Navbar from './Navbar';
-import '../css/Signup.css'
+import '../css/Login.css'
 
 class Signup extends React.Component{
     constructor(props){
@@ -102,7 +102,7 @@ class Signup extends React.Component{
             return(
                 <React.Fragment>
                     <Navbar loginStatus={false} handleLogout={()=>{}} cartCount={this.state.cartCount}/>
-                    <div className="signup-box">
+                    <div className="acct-form-box">
                         <form>
                             <div><label htmlFor="email">Email:</label></div>
                             <div><input type="email" id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" /></div>
