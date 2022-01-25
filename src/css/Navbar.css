@@ -42,3 +42,15 @@ body{
 .all-img{
     vertical-align: middle;
 }
+
+.nb-acc-links{
+    color: rgb(70, 204, 137);
+    margin: 0 20px;
+}
+
+#nb-logout-btn{
+    border: none;
+    padding: 10px;
+    background-color: rgba(219, 51, 36, 0.924);
+    color: whitesmoke;
+}

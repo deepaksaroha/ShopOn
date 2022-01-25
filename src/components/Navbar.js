@@ -33,11 +33,11 @@ class Navbar extends React.Component {
                     <Link to="/cart">Cart({this.props.cartCount})</Link>
                     {
                         this.props.loginStatus ?
-                        <button onClick={this.handleLogout}>Logout</button>
+                        <button id="nb-logout-btn" onClick={this.handleLogout}>Logout</button>
                         :
                         <span>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signup">Signup</Link>
+                            <Link className="nb-acc-links" to="/login">Login</Link>
+                            <Link className="nb-acc-links" to="/signup">Signup</Link>
                         </span>
                     }
                 </div>
