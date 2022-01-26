@@ -66,3 +66,11 @@
     background-color: #414141;
     color: rgba(255, 255, 255, 0.945);
 }
+
+.buy-btn:active{
+    background-color: #c0a612;
+}
+
+.addcart-btn:active{
+    background-color: #353535;
+}

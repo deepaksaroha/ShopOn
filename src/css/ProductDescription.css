@@ -97,3 +97,11 @@ a{
 .des-btn-box{
     margin-top: 40px;
 }
+
+.prd-dec-buy-btn:active{
+    background-color: #c0a612;
+}
+
+.prd-dec-add-btn:active{
+    background-color: #353535;
+}

@@ -17,3 +17,7 @@
 #proceed-box{
     margin: 50px;
 }
+
+#chkout-btn:active{
+    background-color: rgb(29, 144, 73);
+}

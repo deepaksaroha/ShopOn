@@ -64,7 +64,7 @@ class Homepage extends React.Component{
                     <div className="deals-outer-box">
                         <h3>DEALS OF THE DAY</h3>
                         <div>
-                            <h4>Phones and Gadgets Deals</h4>
+                            <h4>Phones and Gadgets</h4>
                             <div className="deals-box">
                                 <a href="/products/1"><div className="deal-img-box"><img src="../images/ID1_1.jpg" alt="" /></div></a>
                                 <a href="/products/2"><div className="deal-img-box"><img src="../images/ID2_1.jpg" alt="" /></div></a>

@@ -4,8 +4,8 @@
     padding: 20px;
     margin-top: 20vh;
     border-radius: 10px;
-    background-color: #686868;
-    color: white;
+    color: rgb(102, 102, 102);
+    border: 1px solid rgb(179, 179, 179);
 }
 
 .acct-form-box>form>div{
@@ -18,7 +18,7 @@
 
 .acct-form-box>form>div>input{
     padding: 5px;
-    border: none;
+    border: 1px solid rgb(179, 179, 179);
     outline: none;
     border-radius: 3px;
     font-size: 16px;
@@ -30,9 +30,14 @@
 
 .acct-form-box>form>div>button{
     border: none;
-    background-color: orange;
+    background-color: rgb(27, 195, 111);
     color: whitesmoke;
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 8px 14px;
+    font-size: 18px;
     margin-top: 10px;
+}
+
+.acct-form-box>form>div>button:active{
+    box-shadow: 0 0 4px 1px rgb(70, 204, 137);
+    color: white;
 }

@@ -29,7 +29,9 @@ body{
     text-decoration: none;
 }
 
+
 #navbar-srch-inputbox{
+    font-size: 16px;
     outline: none;
     padding: 10px;
     border-radius: 4px 0 0 4px;
@@ -42,14 +44,19 @@ body{
 }
 
 #srch-btn{
+    font-size: 16px;
     outline: none;
     padding: 10px;
     border: 1px solid rgb(187, 187, 187);
 }
 
+#srch-btn:active{
+    box-shadow: 0 0 4px 1px rgb(209, 209, 209);
+}
+
 .all-img{
     vertical-align: middle;
-    height: 1em;
+    height: 16px;
 }
 
 .nb-acc-links{
@@ -58,9 +65,22 @@ body{
     border: 1px solid rgb(70, 204, 137);
 }
 
+.nb-acc-links:hover{
+    background-color: rgb(70, 204, 137);
+    color: white;
+}
+
+.nb-acc-links:hover:active{
+    box-shadow: 0 0 4px 1px rgb(70, 204, 137);
+}
+
 #nb-logout-btn{
     border: none;
     padding: 10px;
     background-color: rgba(219, 51, 36, 0.924);
     color: whitesmoke;
+}
+
+#nb-logout-btn:active{
+    font-size: 14px;
 }
