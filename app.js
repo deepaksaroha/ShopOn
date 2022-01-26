@@ -10,7 +10,7 @@ const api = require('./server/api');
 const { connect, getClient } = require('./server/db');
 
 //Configure .env
-require('dotenv').config();
+// require('dotenv').config();
 
 //Set port as process.env.PORT if it is present otherwise set it to 4000
 const port = process.env.PORT || 4000;
