@@ -5,8 +5,8 @@ const crypto = require('crypto')
 const auth = require('../middlewares/auth');
 const Order = require('../models/order');
 const User = require('../models/user');
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 const currency = 'INR';
 const router = express.Router();
