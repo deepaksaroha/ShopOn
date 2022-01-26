@@ -5,20 +5,9 @@ class Checkoutitem extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            name: '',
-            quantity: null,
-            price: null
         }
     }
 
-
-    componentDidMount(){
-        this.setState({
-            name: this.props.item.name,
-            quantity: this.props.item.quantity,
-            price: this.props.item.price
-        })
-    }
 
     render(){
         const item = this.props.item;

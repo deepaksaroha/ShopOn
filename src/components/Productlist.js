@@ -54,9 +54,27 @@ class Products extends React.Component{
     }
 
     componentDidMount(){
-        this.getProductsData();
-        this.getCartData();
-        this.getLoginStatus();
+        let URLString = '/api/products'
+        if(this.props.location.search !== undefined){
+            URLString += this.props.location.search;
+        }
+        if(this.props.match.params.category !== undefined){
+            URLString += '?category='+this.props.match.params.category;
+        }
+
+        Promise.all([axios.get(URLString), axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
+            this.setState({
+                products: responses[0].data.products,
+                cart: responses[1].data.cart,
+                cartCount: responses[1].data.cart.length,
+                isLoggedIn: responses[2].data.loginStatus,
+                isLoaded: true
+            })
+        })
+        .catch(error=>{
+            console.log('some error occured');
+        })
     }
 
     componentDidUpdate(prevPros, prevState){
@@ -73,39 +91,27 @@ class Products extends React.Component{
         this.getCartData();
     }
 
-
-    getLoginStatus=()=>{
-        axios.get('/api/sessions')
-        .then(response=>{
-            this.setState({
-                isLoggedIn: true,
-                isLoaded: true
-            })
-        })
-        .catch(_=>{
-            this.setState({
-                isLoggedIn: false,
-                isLoaded: true
-            })
-        })
-    }
-
     handleChangeItem=()=>{
         this.getCartData();
     }
 
-
     handleLogout=()=>{
         axios.delete('/api/sessions')
         .then(response=>{
-            this.getCartData();
-            this.getLoginStatus();
+            Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+            .then(responses=>{
+                this.setState({
+                    cart: responses[0].data.cart,
+                    cartCount: responses[0].data.cart.length,
+                    isLoggedIn: responses[1].data.loginStatus,
+                    isLoaded: true
+                })
+            })
+            .catch(error=>{
+                console.log('something went wrong')
+            })
         })
-        .catch(_=>{
-            this.getCartData();
-            this.getLoginStatus();
-        })
-        .catch(()=>{
+        .catch(error=>{
             console.log('something went wrong')
         })
     }

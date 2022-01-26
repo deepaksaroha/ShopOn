@@ -28,16 +28,16 @@ class Navbar extends React.Component {
                     <Link to="/home">Home</Link>
                     <form action={this.state.searchText !== ""? "/search": "#"}>
                         <input id="navbar-srch-inputbox" type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} />
-                        <button><img className="all-img" src="../images/srch_b.svg" alt="search"/></button>
+                        <button id="srch-btn"><img className="all-img" src="../images/srch_b.svg" alt="search"/></button>
                     </form>
                     <Link to="/cart">Cart({this.props.cartCount})</Link>
                     {
                         this.props.loginStatus ?
-                        <button onClick={this.handleLogout}>Logout</button>
+                        <button id="nb-logout-btn" onClick={this.handleLogout}>Logout</button>
                         :
-                        <span>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signup">Signup</Link>
+                        <span >
+                            <Link className="nb-acc-links" to="/login">Login</Link>
+                            <Link className="nb-acc-links" to="/signup">Signup</Link>
                         </span>
                     }
                 </div>

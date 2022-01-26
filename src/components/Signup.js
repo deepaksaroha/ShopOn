@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import Navbar from './Navbar';
-import '../css/Signup.css'
+import '../css/Login.css'
 
 class Signup extends React.Component{
     constructor(props){
@@ -77,38 +77,24 @@ class Signup extends React.Component{
                 })
             })
         }
-        
-    }
-
-
-    getLoginStatus=()=>{
-        axios.get('/api/sessions')
-        .then(response=>{
-            this.props.history.push('/home')
-        })
-        .catch(_=>{
-            this.setState({
-                isLoggedIn: false,
-                isLoaded: true
-            })
-        })
-    }
-
-    getCartCount=()=>{
-        axios.get('/api/users/cart')
-        .then(response=>{
-            this.setState({
-                cartCount: response.data.cart.length
-            })
-        })
-        .catch(error=>{
-            console.log('cart fetch not successful')
-        })
     }
 
     componentDidMount(){
-        this.getCartCount();
-        this.getLoginStatus();
+        Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
+        .then(responses=>{
+            if(responses[1].data.loginStatus === true){
+                this.props.history.push('/home');
+            }else{
+                this.setState({
+                    cartCount: responses[0].data.cart.length,
+                    isLoggedIn: responses[1].data.loginStatus,
+                    isLoaded: true
+                })
+            }
+        })
+        .catch(error=>{
+            console.log('something went wrong');
+        })
     }
 
     render(){
@@ -116,7 +102,7 @@ class Signup extends React.Component{
             return(
                 <React.Fragment>
                     <Navbar loginStatus={false} handleLogout={()=>{}} cartCount={this.state.cartCount}/>
-                    <div className="signup-box">
+                    <div className="acct-form-box">
                         <form>
                             <div><label htmlFor="email">Email:</label></div>
                             <div><input type="email" id="email" name='email' value={this.state.email} onChange={this.handleChange} placeholder="Email" /></div>

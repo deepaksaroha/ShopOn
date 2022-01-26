@@ -1,7 +1,38 @@
-.login-form-box{
+.acct-form-box{
     margin: 0 auto;
     width: fit-content;
     padding: 20px;
-    border: 1px solid black;
     margin-top: 20vh;
+    border-radius: 10px;
+    background-color: #686868;
+    color: white;
+}
+
+.acct-form-box>form>div{
+    margin: 10px;
+}
+
+.acct-form-box>form>div>label{
+    font-size: 20px;
+}
+
+.acct-form-box>form>div>input{
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.acct-form-box>form>div>input:focus{
+    box-shadow: 0 0 5px 2px rgb(104, 104, 104);
+}
+
+.acct-form-box>form>div>button{
+    border: none;
+    background-color: orange;
+    color: whitesmoke;
+    padding: 5px 10px;
+    font-size: 16px;
+    margin-top: 10px;
 }
