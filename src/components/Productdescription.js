@@ -106,6 +106,7 @@ class ProductDescription extends React.Component{
 
         const cartProductIds = this.state.cart.map(product=>product.productId)
         const productData = this.state.productData;
+
         
         if(this.state.isLoaded){
             return(
@@ -117,13 +118,22 @@ class ProductDescription extends React.Component{
                                 <div id="pro-desc-disp-img"><img className="all-imgs" src={`${productData.images[0]}.jpg`} alt="img"/></div>
                             </div>
                             <div id="img-othrs" className="pro-desc-disp-img1">
-                                {
-                                    productData.images.map(img=>{
+                                {/* { */}
+                                
+                                    <div key={productData.images[0]} className="pdtn"><img className="all-imgs"src={`${productData.images[0]}.jpg`} onError={(e) => {(e.target.onerror = null); e.target.src="image_path_here"}} alt="img" /></div>
+                                    <div key={productData.images[1]} className="pdtn"><img className="all-imgs"src={`${productData.images[1]}.jpg`} onError={(e) => {(e.target.onerror = null); e.target.src="image_path_here"}} alt="img" /></div>
+                                    <div key={productData.images[2]} className="pdtn"><img className="all-imgs"src={`${productData.images[2]}.jpg`} onError={(e) => {(e.target.onerror = null); e.target.src="image_path_here"}} alt="img" /></div>
+                                    <div key={productData.images[3]} className="pdtn"><img className="all-imgs"src={`${productData.images[3]}.jpg`} onError={(e) => {(e.target.onerror = null); e.target.src="image_path_here"}} alt="img" /></div>
+
+                                    {/* productData.images.map((img, index)=>{
+                                        if(index > 3){
+                                            break;
+                                        }
                                         return <div key={img} className="pdtn">
                                             <img className="all-imgs"src={`${img}.jpg`} alt="img" />
                                         </div>
-                                    })
-                                }
+                                    }) */}
+                                {/* } */}
                             </div>
                         </div>
                         <div className="pro-desc-det-box">
