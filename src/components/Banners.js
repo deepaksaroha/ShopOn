@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import getBannerImgURLs from './getBannerImgURLs';
 import '../css/Banner.css'
 class Banner extends React.Component{
