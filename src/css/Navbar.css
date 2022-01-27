@@ -3,7 +3,7 @@ body{
 }
 
 #navbar-margin-box{
-    height: calc(40px + 1em);
+    height: calc(40px + 1.3em);
 }
 .navbar{
     position: fixed;
