@@ -3,8 +3,12 @@ import React from 'react';
 import '../css/Cartitem.css'
 
 class CartItem extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     handleQunatityChange=(val)=>{
+        console.log('1')
         axios.patch('/api/users/cart',{
             productId: this.props.item.productId,
             incValue: val

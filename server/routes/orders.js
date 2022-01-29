@@ -56,6 +56,10 @@ router.post('/',  auth.authenticate, (req, res, next)=>{
             price += element.quantity*element.price;
         });
 
+        if(price < 500){
+            price += 50;
+        }
+
         const amount = price*100;
 
 
