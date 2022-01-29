@@ -16,7 +16,6 @@ exports.connect = (dbConfig) => {
         
         if (username) {
             if (password !== undefined) {
-                console.log('in password')
                 absoluteHostName = `${username}:${password}@${absoluteHostName}`;
             } else {
                 absoluteHostName = `${username}@${absoluteHostName}`;
