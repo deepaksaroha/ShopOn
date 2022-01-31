@@ -1,19 +1,18 @@
 .categories-outer-box{
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid rgb(194, 194, 194);
+    color: black;
+    border-bottom: 1px solid grey;
 }
 
 .categories-outer-box a{
     text-decoration: none;
-    color: rgb(29, 29, 29);
 }
 
 .category-link{
     padding: 0.5em;
     font-size: 0.9em;
 }
-
 
 .subcategories-box{
     display: none;
@@ -27,7 +26,7 @@
 }
 
 .category:hover>.category-link>a {
-    color: rgb(93, 155, 236);
+    color: rgb(73, 165, 134);
 }
 
 .subcategories-box{

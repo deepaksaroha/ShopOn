@@ -151,7 +151,7 @@ class Products extends React.Component{
                                         inCart = true
                                     }
                                 })
-                                return <div key={product.productId}>
+                                return <div className="card-box" key={product.productId}>
                                     <ProductCard {...product} inCart={inCart} handleAddProduct={this.handleAddProduct} handleBuy={this.handleBuy} />
                                 </div>
                             })

@@ -3,9 +3,6 @@ import React from 'react';
 import '../css/Cartitem.css'
 
 class CartItem extends React.Component {
-    constructor(props){
-        super(props);
-    }
 
     handleQunatityChange=(val)=>{
         console.log('1')
