@@ -1,5 +1,6 @@
-import axios from 'axios';
 import React from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Navbar from './Navbar';
 import '../css/Login.css'
 
@@ -113,7 +114,7 @@ class Signup extends React.Component{
                             <div><button onClick={this.handleSubmit}>Signup</button></div>
                         </form>
                         <p>{this.state.error}</p>
-                        <p>{this.state.successMsg} {this.state.successMsg !== ''?<a href='/login'>Login</a>:''}</p>
+                        <p>{this.state.successMsg} {this.state.successMsg !== ''?<Link to='/login'>Login</Link>:''}</p>
                     </div>
                 </React.Fragment>
             )

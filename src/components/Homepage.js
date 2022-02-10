@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import Categories from './Categories'
 // import Recommendations from './Recommendations'
@@ -67,18 +68,18 @@ class Homepage extends React.Component{
                             <h4>Phones and Gadgets</h4>
                             <hr style={{background: 'grey'}}/>
                             <div className="deals-box">
-                                <a href="/products/1"><div className="deal-img-box"><img src="../images/ID1_1.jpg" alt="" /><div className="deal-name">IPhone 11 8 gb| 64 gb</div></div></a>
-                                <a href="/products/2"><div className="deal-img-box"><img src="../images/ID2_1.jpg" alt="" /><div className="deal-name">IPhone 13 16 gb| 128 gb</div></div></a>
-                                <a href="/products/3"><div className="deal-img-box"><img src="../images/ID3_1.jpg" alt="" /><div className="deal-name">SAMSUNG Galaxy F22 6gb | 128 gb</div></div></a>
+                                <Link to="/products/1"><div className="deal-img-box"><img src="../images/ID1_1.jpg" alt="" /><div className="deal-name">IPhone 11 8 gb| 64 gb</div></div></Link>
+                                <Link to="/products/2"><div className="deal-img-box"><img src="../images/ID2_1.jpg" alt="" /><div className="deal-name">IPhone 13 16 gb| 128 gb</div></div></Link>
+                                <Link to="/products/3"><div className="deal-img-box"><img src="../images/ID3_1.jpg" alt="" /><div className="deal-name">SAMSUNG Galaxy F22 6gb | 128 gb</div></div></Link>
                             </div>
                         </div>
                         <div className="sub-deal-box">
                             <h4>Fashion and Accesories</h4>
                             <hr style={{background: 'grey'}}/>
                             <div className="deals-box">
-                                <a href="/products/6"><div className="deal-img-box"><img src="../images/ID6_1.jpg" alt="" /><div className="deal-name">Men's Blue Denim Jacket</div></div></a>
-                                <a href="/products/7"><div className="deal-img-box"><img src="../images/ID7_1.jpg" alt="" /><div className="deal-name">Men's Olive Green Trousers</div></div></a>
-                                <a href="/products/8"><div className="deal-img-box"><img src="../images/ID8_1.jpg" alt="" /><div className="deal-name">White Men Casual Sneeker Shoes</div></div></a>
+                                <Link to="/products/6"><div className="deal-img-box"><img src="../images/ID6_1.jpg" alt="" /><div className="deal-name">Men's Blue Denim Jacket</div></div></Link>
+                                <Link to="/products/7"><div className="deal-img-box"><img src="../images/ID7_1.jpg" alt="" /><div className="deal-name">Men's Olive Green Trousers</div></div></Link>
+                                <Link to="/products/8"><div className="deal-img-box"><img src="../images/ID8_1.jpg" alt="" /><div className="deal-name">White Men Casual Sneeker Shoes</div></div></Link>
                             </div>
                         </div>
                     </div>
