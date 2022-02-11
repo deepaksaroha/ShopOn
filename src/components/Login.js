@@ -101,7 +101,7 @@ class Login extends React.Component {
         if(this.state.isLoaded){
             return (
                 <React.Fragment>
-                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.state.handleLogout} cartCount={this.state.cartCount}/>
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.state.handleLogout} cartCount={this.state.cartCount} {...this.props}/>
                     <div className="acct-form-box">
                         <form>
                             <div><label htmlFor="email">Email:</label></div>

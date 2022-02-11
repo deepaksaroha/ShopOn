@@ -136,7 +136,7 @@ class Products extends React.Component{
         }else{
         return(
             <React.Fragment>
-                <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount}/>
+                <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} {...this.props}/>
                 <Categories />
                 <div className="plp-main">
                     <div className="sortfilter-outer-box">

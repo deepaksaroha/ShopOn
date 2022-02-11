@@ -63,6 +63,7 @@ class ProductDescription extends React.Component{
 
 
     handleAddToCart=()=>{
+        console.log(new Date().getTime());
         axios.put('/api/users/cart',
             {
                 productId: this.state.productData.productId,
@@ -72,9 +73,11 @@ class ProductDescription extends React.Component{
             }
         )
         .then(response=>{
+            console.log(new Date().getTime());
             return axios.get('/api/users/cart')
         })
         .then(response=>{
+            console.log(new Date().getTime());
             this.setState({
                 cart: response.data.cart,
                 cartCount: response.data.cart.length
@@ -111,7 +114,7 @@ class ProductDescription extends React.Component{
         if(this.state.isLoaded){
             return(
                 <React.Fragment>
-                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount}/>
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} {...this.props}/>
                     <div className="pro-desc-outer-box">
                         <div className="pro-desc-img-box">
                             <div className="pro-desc-disp-img1">

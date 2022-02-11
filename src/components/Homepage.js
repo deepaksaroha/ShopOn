@@ -59,7 +59,7 @@ class Homepage extends React.Component{
         if(this.state.isLoaded){
             return(
                 <React.Fragment>
-                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />                    
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} {...this.props}/>                    
                     <Categories />
                     <Banners />
                     <div className="deals-outer-box">

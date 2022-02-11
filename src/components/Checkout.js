@@ -73,7 +73,7 @@ class Checkout extends React.Component{
     
             return(
                 <React.Fragment>
-                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} {...this.props}/>
                     {
                         this.state.cart.length>0?
                         <div className="checkout-main-outerbox">
