@@ -32,8 +32,10 @@ class Cart extends React.Component{
     }
 
     handleChangeItem=()=>{
+        console.log('2')
         axios.get('/api/users/cart')
         .then(response=>{
+            console.log('3')
             this.setState({
                 cart: response.data.cart,
                 cartCount: response.data.cart.length
@@ -77,7 +79,7 @@ class Cart extends React.Component{
         
             return(
                 <React.Fragment>
-                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} />
+                    <Navbar loginStatus={this.state.isLoggedIn} handleLogout={this.handleLogout} cartCount={this.state.cartCount} {...this.props}/>
                     {
                         this.state.cartCount>0?
                         <div>
