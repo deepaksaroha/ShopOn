@@ -1,3 +1,8 @@
+.ban-img{
+    width: 100vw;
+    height: 50vh;
+}
+
 .btnbox{
     position: relative;
 }
@@ -19,4 +24,11 @@
 
 .btn1{
     left: 0%;
+}
+
+@media screen and (max-width: 800px) { 
+    .ban-img{
+        width: 100vw;
+        height: 35vh;
+    }
 }

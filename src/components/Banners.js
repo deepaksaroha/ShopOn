@@ -25,10 +25,20 @@ class Banner extends React.Component{
     render(){
 
         const banners = this.state.banners;
+        function ban(ind){
+            if(ind === 0){
+                return <img className="ban-img" src={banners[ind]} alt="img"/>
+            }else if(ind === 1){
+                return <img className="ban-img" src={banners[ind]} alt="img"/>
+            }else{
+                return <img className="ban-img" src={banners[ind]} alt="img"/>
+            }
+        }
 
         return <React.Fragment>
             <div className="btnbox">
-                <img src={banners[this.state.count]} alt="img" style={{width: '100vw', height: '50vh'}}/>
+                { ban(this.state.count) }
+                {/* <img src={banners[this.state.count]} alt="img" style={{width: '100vw', height: '50vh'}}/> */}
             </div>
         </React.Fragment>
     }
