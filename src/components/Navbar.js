@@ -12,7 +12,7 @@ class Navbar extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(this.props.cartCount !== nextProps.cartCount || this.state.searchText !== nextState.searchText){
+        if(this.props.cartCount !== nextProps.cartCount || this.state.searchText !== nextState.searchText || this.props.loginStatus !== nextProps.loginStatus){
             return true;
         }
         return false;
