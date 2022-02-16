@@ -100,7 +100,10 @@ class Cart extends React.Component{
                             </div>
                         </div>
                         :
-                        <p>Your Cart is Empty</p>
+                        <div style={{textAlign: 'center', }}>
+                            <p>Your Cart is Empty</p>
+                            <button style={{color: 'greenyellow', border: '1px solid greenyellow', fontSize: '36px', borderRadius: '10px', background: 'none'}}><Link to="/home">Let's ShopOn</Link></button>
+                        </div>
                     }
 
                 </React.Fragment>
