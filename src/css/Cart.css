@@ -25,6 +25,9 @@
 @media screen and (max-width: 400px) {
     .cart-otr-bx{
         margin: 20px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
     }
 
     #proceed-box{
@@ -34,5 +37,9 @@
     #chkout-btn{
         width: 100%;
         font-size: 16px;
+    }
+
+    .crt-row{
+        box-shadow: 0 0 1px 1px rgb(212, 212, 212);  
     }
 }
