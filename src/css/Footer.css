@@ -1,8 +1,13 @@
+body{
+    min-height: 100vh;
+    position: relative;
+}
+
 .footer{
-    text-align:center;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align:center;
     background-color: rgb(29, 29, 29);
     color: white;
     padding: 1.4em;
