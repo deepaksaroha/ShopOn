@@ -73,7 +73,7 @@ class Navbar extends React.Component {
                     </Link>
 
                     <div className="account-outer-box">
-                        <img class="icons" onClick={this.expandAccOption} src="../images/account.png" alt="account"/>
+                        <img className="icons" onClick={this.expandAccOption} src="../images/account.png" alt="account"/>
                         {
                         this.state.isMobile ?
                             <div className="accb1">

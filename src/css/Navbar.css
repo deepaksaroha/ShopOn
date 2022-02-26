@@ -3,7 +3,7 @@ body{
 }
 
 #navbar-margin-box{
-    height: calc(40px + 1.3em);
+    height: calc(30px + 1.3em);
 }
 
 .navbar{
@@ -69,10 +69,6 @@ body{
 .nb-acc-links:hover{
     background-color: rgb(70, 204, 137);
     color: white;
-}
-
-.nb-acc-links:hover:active{
-    box-shadow: 0 0 4px 1px rgb(70, 204, 137);
 }
 
 #nb-logout-btn{

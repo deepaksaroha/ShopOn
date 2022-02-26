@@ -36,11 +36,11 @@ class CartItem extends React.Component {
         return (
             <React.Fragment>
                 <td className="crt-row-dta"><div className="cart-img-bx"><img src={`../images/ID${item.productId}_1.jpg`} alt="" /></div></td>
-                <td className="crt-row-dta"><p>{item.name}</p></td>
+                <td className="crt-row-dta"><p className="item-name">{item.name}</p></td>
                 <td className="crt-row-dta">
-                    <p>
+                    <p className="chng-btn-box">
                         <button className="chng-btn" onClick={()=>this.handleQunatityChange(-1)}>-</button>
-                        {item.quantity}
+                        <span className="item-qty">{item.quantity}</span>
                         <button className="chng-btn" onClick={()=>this.handleQunatityChange(1)}>+</button>
                     </p>
                 </td>

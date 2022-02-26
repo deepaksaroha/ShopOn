@@ -21,3 +21,18 @@
 #chkout-btn:active{
     background-color: rgb(29, 144, 73);
 }
+
+@media screen and (max-width: 400px) {
+    .cart-otr-bx{
+        margin: 20px 10px;
+    }
+
+    #proceed-box{
+        margin: auto 10px;
+    }
+
+    #chkout-btn{
+        width: 100%;
+        font-size: 16px;
+    }
+}
