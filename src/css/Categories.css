@@ -58,6 +58,7 @@
 }
 
 #overlay{
+    display: none;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -106,5 +107,8 @@
     .subcategories-box>a{
         font-size: 15px;
         padding-left: 20px;
+    }
+    #overlay{
+        display: block;
     }
 }
