@@ -96,7 +96,7 @@ class Cart extends React.Component{
                             </div>
                             <div id="proceed-box">
                                 <p>Cart Value: Rs {amount}</p>
-                                <button id="chkout-btn"><Link to="/checkout">Proceed to Checkout</Link></button>
+                                <Link to="/checkout"><button id="chkout-btn">Proceed to Checkout</button></Link>
                             </div>
                         </div>
                         :
