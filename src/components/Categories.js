@@ -32,7 +32,7 @@ class Categories extends React.Component{
     render(){
 
         const element = this.state.categories.map(category=>{
-                    return <div className="category" key={category.categoryId}>
+                    return <div className="category" onClick={this.toggleCats} key={category.categoryId}>
                         <div className="category-link"><Link to={"/category/"+category.name}>{category.name}</Link></div>
                         <div className="subcategories-box">
                             {
@@ -46,6 +46,12 @@ class Categories extends React.Component{
 
         return(
             <React.Fragment>
+                {
+                    this.state.showCats ?
+                    <div id="overlay"></div>
+                    :
+                    null
+                }
                 <div className="categories-outer-box">
                     <div className="cat-box" id="full-screen">
                         {element}
