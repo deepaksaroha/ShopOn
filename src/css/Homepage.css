@@ -59,3 +59,16 @@
 .deal-img-box>img{
     height: 100%;
 }
+
+@media screen and (max-width : 800px) { 
+    .deal-img-box{
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    .deals-outer-box{
+        margin: 10px;
+    }
+}
