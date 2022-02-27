@@ -115,7 +115,7 @@ body{
 
 @media screen and (max-width: 450px){
     .navbar{
-        font-size: 14px;
+        font-size: 15px;
     }
 
     #navbar-srch-inputbox, #srch-btn{
