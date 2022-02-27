@@ -103,6 +103,11 @@
     .crt-row-dta{
         font-size: 14px;
     }
+    
+    .crt-row-dta p{
+        margin: 0;
+    }
+
     .cart-img-bx{
         height: 70px;
         width: 70px;

@@ -41,7 +41,7 @@ a{
 }
 
 .pro-desc-det-box{
-    padding: 50px;  
+    padding: 50px;
 }
 
 .pro-desc-det-box>h4{
@@ -67,7 +67,7 @@ a{
 
 #opt-slctr{
     padding: 5px 20px;
-    font-size: 20px;
+    font-size: 1.2em;
     color: white;
     background-color: rgb(53, 53, 53);
     outline: none;
@@ -75,11 +75,10 @@ a{
 }
 
 #label{
-    font-size: 24px;
+    font-size: 1.2em;
 }
 
 .prd-des-btn{
-    margin-right: 30px;
     padding: 10px 25px;
     font-size: 20px;
     border: none;
@@ -104,4 +103,76 @@ a{
 
 .prd-dec-add-btn:active{
     background-color: #353535;
+}
+
+@media screen and (max-width: 1100px) {
+    #pro-desc-disp-img{
+        height: 40vw;
+        width: 40vw;
+    }
+
+    .pro-desc-det-box{
+        font-size: 16px;
+    }
+
+    .prd-des-btn{
+        font-size: 14px;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .pro-desc-outer-box{
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+
+    .pro-desc-img-box{
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .pro-desc-outer-box{
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+
+    .pro-desc-img-box{
+        margin: 0 auto;
+    }
+
+    #img-othrs{
+        display: none;
+    }
+
+    .pro-desc-det-box{
+        padding: 0;
+        font-size: 14px;
+    }
+    
+    .pro-desc-det-box>h2,h4{
+        margin: 0;
+    }
+
+    .pro-desc-disp-img1{
+        padding: 10px;
+        border: none;
+    }
+
+    #pro-desc-disp-img{
+        height: 230px;
+        width: 230px;
+    }
+
+    .prd-des-btn{
+        font-size: 14px;
+        width: 50%;
+    }
+
+    .des-btn-box{
+        text-align: center;
+    }
 }

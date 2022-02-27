@@ -165,7 +165,7 @@ class ProductDescription extends React.Component{
                 </React.Fragment>
             )
         }else{
-            return ''
+            return null;
         }        
     }
 }

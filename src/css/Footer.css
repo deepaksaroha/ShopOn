@@ -4,9 +4,10 @@ body{
 }
 
 .footer{
-    width: 100%;
     position: absolute;
     bottom: 0;
+    right: 0;
+    left: 0;
     text-align:center;
     background-color: rgb(29, 29, 29);
     color: white;
@@ -17,4 +18,10 @@ body{
 
 #ftr-mrgn{
     height: 3.73em;
+}
+
+@media screen and (max-width: 500px) {
+    .footer{
+        font-size: 0.8em;
+    }
 }
