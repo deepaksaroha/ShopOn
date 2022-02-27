@@ -59,6 +59,7 @@ class Navbar extends React.Component {
 
         return (
             <React.Fragment>
+                <div style={{display: 'flex'}}>
                 <div className="navbar">
                     <Link to="/home">Home</Link>
                     
@@ -89,6 +90,7 @@ class Navbar extends React.Component {
 
                 </div>
                 <div id="navbar-margin-box"></div>
+                </div>
             </React.Fragment>
         )
     }
