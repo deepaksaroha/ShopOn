@@ -30,3 +30,28 @@
     background-color: rgb(255, 166, 0);
     border-radius: 5px;
 }
+
+@media screen and (max-width: 800px) {
+    .checkout-main-outerbox{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    td{
+        padding: 5px;
+    }
+
+    tr{
+        box-shadow: 0 0 1px 1px grey;
+    }
+
+    .checkout-box>div{
+        float: right;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .checkout-main-outerbox{
+        margin: 10px;
+    }
+}

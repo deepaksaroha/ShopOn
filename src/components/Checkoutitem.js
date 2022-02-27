@@ -17,7 +17,7 @@ class Checkoutitem extends React.Component {
                 <td><img className="chkout-img" src={`../images/ID${item.productId}_1.jpg`} alt="" /></td>
                 <td><p>{item.name}</p></td>
                 <td><p>{item.quantity}</p></td>
-                <td><p>{item.price *item.quantity}</p></td>
+                <td><p>&#8377;{item.price *item.quantity}</p></td>
             </React.Fragment>
         )
     }
