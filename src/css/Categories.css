@@ -72,6 +72,7 @@
         z-index: 2;
         border-bottom: none;
         font-size: 18px;
+        height: 100%;
     }
 
     .category{
@@ -80,11 +81,15 @@
     }
 
     #exp-btn{
+        position: relative;
         display: inline;
         border: none;
         font-weight: bold;
         background-color: rgba(128, 128, 128, 0.363);
         height: 30px;
+        z-index: 3;
+        border: none;
+        border-bottom: 1px solid rgb(199, 199, 199);
     }
 
     #full-screen{
@@ -94,7 +99,7 @@
     #small-screen{
         display: flex;
         flex-direction: column;
-        background-color: white;
+        background-color: rgb(241, 241, 241);
         height: 100%;
     }
 

@@ -59,13 +59,12 @@ class Navbar extends React.Component {
 
         return (
             <React.Fragment>
-                <div style={{display: 'flex'}}>
                 <div className="navbar">
                     <Link to="/home">Home</Link>
                     
                     <form onSubmit={this.handleSearch}>
-                        <input id="navbar-srch-inputbox" type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} />
-                        <button id="srch-btn"><img className="all-img" src="../images/srch_b.svg" alt="search"/></button>
+                        <input id="navbar-srch-inputbox" type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} /><button id="srch-btn"><img className="all-img" src="../images/srch_b.svg" alt="search"/></button>
+                        {/* <input id="navbar-srch-inputbox" type="text" name="searchText" value={this.state.searchText} onChange={this.handleChange} /><button id="srch-btn">Submit</button> */}
                     </form>
 
                     <Link to="/cart">
@@ -90,7 +89,6 @@ class Navbar extends React.Component {
 
                 </div>
                 <div id="navbar-margin-box"></div>
-                </div>
             </React.Fragment>
         )
     }
