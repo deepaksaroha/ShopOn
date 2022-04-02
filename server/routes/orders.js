@@ -110,7 +110,7 @@ router.put('/:id', auth.authenticate, (req, res) => {
     const orderId = req.params.id;
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
     if (!razorpay_payment_id || !razorpay_signature) {
-        res.status(400).error({ error: "Missing razorpay payment id or signature" });
+        res.status(400).send({ error: "Missing razorpay payment id or signature" });
         return;
     }
     const generated_signature = crypto.createHmac('sha256', secret).update(orderId + "|" + razorpay_payment_id).digest('hex');

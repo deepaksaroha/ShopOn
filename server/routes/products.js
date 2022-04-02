@@ -18,7 +18,7 @@ router.get('/', (req, res, next)=>{
     .catch(error=>{
         res.status(500).send({error: 'Internal server error'});
     })
-
+    return;
 })
 
 //get one product
@@ -31,6 +31,7 @@ router.get('/:productId', (req, res, next)=>{
     .catch(error=>{
         res.status(500).send({error: 'Internal server error'});
     })
+    return;
 })
 
 module.exports = router;

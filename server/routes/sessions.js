@@ -1,6 +1,5 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const auth = require('../middlewares/auth')
 const router = express.Router();
 
 const UserCredential = require('../models/user-credential');
@@ -13,7 +12,8 @@ router.get('/', (req, res)=>{
         res.status(200).send({loginStatus: false});
         return;
     }
-    res.status(200).send({loginStatus: true})
+    res.status(200).send({loginStatus: true});
+    return;
 });
 
 //user login
@@ -62,12 +62,14 @@ router.post('/', (req, res) => {
                 throw new Error();
             })
         });
+        return;
         // return User.updateOne({ userId: req.session.userId }, { $addToSet: { cart: { $each: cartArray } } })
         // res.status(204).send();
     })
     .then(()=>{
         delete req.session.cart;
         res.status(200).send({message: 'Login successfull'});
+        return;
     })
     .catch(() => {
         if(req.session.userId){
@@ -75,6 +77,7 @@ router.post('/', (req, res) => {
         }
         res.status(500).send({ error: "Internal Server Error" });
     });
+    return;
 });
 
 
@@ -82,6 +85,7 @@ router.post('/', (req, res) => {
 router.delete('/', (req, res) => {
     delete req.session.userId;
     res.status(204).send();
+    return;
 });
 
 module.exports = router;

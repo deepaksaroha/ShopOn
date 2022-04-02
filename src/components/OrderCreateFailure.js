@@ -1,3 +1,3 @@
-const onOrderCreateFailure=()=>{}
+const onOrderCreateFailure=()=>{};
 
 module.exports = onOrderCreateFailure;

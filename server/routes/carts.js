@@ -1,26 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middlewares/auth');
 const User = require('../models/user')
 
 
 //get cart
 router.get('/', (req, res, next)=>{
+    console.log("in get");
     if(req.session.userId === undefined){
         res.status(200).send({cart : req.session.cart});
     }else{
         User.findOne({ userId: req.session.userId }, { cart: 1 })
         .then(cart=>{
+            console.log("out get");
             res.status(200).send({cart: cart.cart})
         })
         .catch(()=>{
             res.status(500).send({error: 'internal server error'})
         })
     }
+    return;
 })
 
 //put product in cart
 router.put('/', (req, res, next)=>{
+    console.log("in put");
 
     const { productId, name, quantity, price } = req.body;
 
@@ -32,15 +35,18 @@ router.put('/', (req, res, next)=>{
 
     User.updateOne({ userId: req.session.userId }, { $push: { cart: { productId: productId, name: name, quantity: quantity, price: price } } })
     .then(()=>{
+        console.log("out put");
         res.status(200).send({message: 'Item Added'})
     })
     .catch(()=>{
         res.status(500).send({error: 'internal server error'})
     })
+    return;
 })
 
 //update quantity of a product
 router.patch('/', (req, res, next)=>{
+    console.log("in");
 
     const { productId, incValue } = req.body;
 
@@ -57,7 +63,6 @@ router.patch('/', (req, res, next)=>{
                 res.status(500).send({error: 'Internal server error'})
             })
         }
-    
         
     }else{
         if(req.session.userId === undefined){
@@ -93,6 +98,7 @@ router.patch('/', (req, res, next)=>{
             })
         }
     }
+    return;
 })
 
 module.exports = router;
