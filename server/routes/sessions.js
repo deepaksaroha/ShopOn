@@ -37,7 +37,6 @@ router.post('/', (req, res) => {
 
     const cartArray = req.session.cart;
         
-
     UserCredential.findOne({ email: email })
     .then(user => {
         if (!user) {
@@ -54,20 +53,20 @@ router.post('/', (req, res) => {
 
         req.session.userId = user.id;
 
-        cartArray.forEach(item => {
-            
-            User.updateOne({ userId: req.session.userId, "cart.productId": {$ne: item.productId} }, { $push: { cart: item } })
-            .then(()=>{})
-            .catch(error=>{
-                throw new Error();
-            })
-        });
-        return;
-        // return User.updateOne({ userId: req.session.userId }, { $addToSet: { cart: { $each: cartArray } } })
-        // res.status(204).send();
-    })
-    .then(()=>{
-        delete req.session.cart;
+        async function f(){
+            for(let i=0; i<cartArray.length; i++){
+                const item = cartArray[i];
+                await User.updateOne({ userId: req.session.userId, "cart.productId": {$ne: item.productId} }, { $push: { cart: item } })
+                .then(()=>{})
+                .catch(error=>{
+                    console.log('cart not updated!');
+                })
+            }
+            delete req.session.cart;
+        }
+
+        f();
+
         res.status(200).send({message: 'Login successfull'});
         return;
     })
