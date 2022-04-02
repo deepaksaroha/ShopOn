@@ -63,12 +63,10 @@ router.post('/', (req, res) => {
                 })
             }
             delete req.session.cart;
+            res.status(200).send({message: 'Login successfull'});
         }
 
         f();
-
-        res.status(200).send({message: 'Login successfull'});
-        return;
     })
     .catch(() => {
         if(req.session.userId){
