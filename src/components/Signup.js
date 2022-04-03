@@ -33,19 +33,12 @@ class Signup extends React.Component{
             return false;
         }
 
-        // if(!new RegExp('').test(this.state.email)){
-        //     this.setState({
-        //         error: 'Invalid email'
-        //     })
-        //     return false;
-        // }
-
-        // if(!new RegExp('').test(this.state.password)){
-        //     this.setState({
-        //         error: 'password not satisfying requirements'
-        //     })
-        //     return false;
-        // }
+        if(!new RegExp('^[a-zA-Z].*@.+\\.[a-zA-Z]+$').test(this.state.email)){
+            this.setState({
+                error: 'Invalid email'
+            })
+            return false;
+        }
 
         if(this.state.cnfPassword !== this.state.password){
             this.setState({
@@ -61,6 +54,7 @@ class Signup extends React.Component{
     }
 
     handleSubmit = (e) => {
+        console.log('abc');
         e.preventDefault();
         if(this.validateForm()){
             axios.post('/api/users',{

@@ -22,7 +22,6 @@ class Login extends React.Component {
         })
     }
 
-
     validateForm=()=>{
         if(this.state.email === '' || this.state.password === ''){
             this.setState({
@@ -31,12 +30,12 @@ class Login extends React.Component {
             return false;
         }
 
-        // if(!new RegExp('').test(this.state.email)){
-        //     this.setState({
-        //         error: 'Invalid email'
-        //     })
-        //     return false;
-        // }    
+        if(!new RegExp('^[a-zA-Z].*@.+\\.[a-zA-Z]+$').test(this.state.email)){
+            this.setState({
+                error: 'Invalid email'
+            })
+            return false;
+        }
 
         this.setState({
             error: ''
