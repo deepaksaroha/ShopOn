@@ -52,7 +52,13 @@ class Categories extends React.Component{
                     :
                     null
                 }
-                <div><button id="exp-btn" onClick={this.toggleCats}><img src="../images/ham.png" alt="Menu"/></button></div>
+                <div>{
+                        !this.state.showCats?
+                        <button id="exp-btn" onClick={this.toggleCats}><img src="../images/ham.png" alt="Menu"/></button>
+                        :
+                        null
+                    }
+                </div>
                 <div className="categories-outer-box">
                     <div className="cat-box" id="full-screen">
                         {element}
@@ -60,6 +66,7 @@ class Categories extends React.Component{
                     {
                         this.state.showCats ?
                         <div className="cat-box" id="small-screen">
+                            <button id="exp-btn" onClick={this.toggleCats} style={{display: 'inline'}}><img src="../images/arrow_back.png" alt="Menu"/></button>
                             Categories
                             {element}
                         </div>
