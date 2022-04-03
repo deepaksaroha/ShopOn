@@ -62,7 +62,6 @@ router.post('/',  auth.authenticate, (req, res, next)=>{
 
         const amount = price*100;
 
-
         const order = new Order({
             userId: req.session.userId,
             products: items,
@@ -85,7 +84,6 @@ router.post('/',  auth.authenticate, (req, res, next)=>{
                     res.status(500).send({ error: 'Error in creating razorpay order' })
                     return;
                 }
-
 
                 res.status(201).send({
                     amount,
@@ -113,11 +111,13 @@ router.put('/:id', auth.authenticate, (req, res) => {
         res.status(400).send({ error: "Missing razorpay payment id or signature" });
         return;
     }
-    const generated_signature = crypto.createHmac('sha256', secret).update(orderId + "|" + razorpay_payment_id).digest('hex');
+    const generated_signature = crypto.createHmac('sha256', secret).update(razorpay_order_id + "|" + razorpay_payment_id).digest('hex');
+
     if (generated_signature === razorpay_signature) {
-        Order.updateOne({ id: orderId }, { $set: { status: 'Completed', razorpay_payment_id, razorpay_order_id, razorpay_signature }})
+        const id = orderId;
+        Order.findByIdAndUpdate(id, { $set: { status: 'Completed' }})
         .then(() => {
-            res.send(204).send();
+            res.status(204).send();
         })
         .catch(()=>{
             res.status(500).send({error: 'internal server error'});
@@ -145,7 +145,6 @@ router.put('/:id', auth.authenticate, (req, res) => {
 //     })
 
 // })
-
 
 
 module.exports = router;

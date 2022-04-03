@@ -2,7 +2,10 @@ const paymentHandlers = {
     onSuccess: (options) => {
         fetch(`/api/orders/${options.id}`, {
             method: 'PUT',
-            body: JSON.stringify.apply(options),
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(options),
         })
         .then(res=>res.json())
         .then(res=>{
