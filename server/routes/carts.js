@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
 
-
 //get cart
 router.get('/', (req, res, next)=>{
     if(req.session.userId === undefined){
