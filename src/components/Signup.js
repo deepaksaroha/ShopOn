@@ -33,7 +33,7 @@ class Signup extends React.Component{
             return false;
         }
 
-        if(!new RegExp('^[a-zA-Z].*@.+\\.[a-zA-Z]+$').test(this.state.email)){
+        if(!new RegExp('^[a-zA-Z].*@[^@_]+\\.[a-zA-Z]+$').test(this.state.email)){
             this.setState({
                 error: 'Invalid email'
             })

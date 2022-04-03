@@ -30,7 +30,7 @@ class Login extends React.Component {
             return false;
         }
 
-        if(!new RegExp('^[a-zA-Z].*@.+\\.[a-zA-Z]+$').test(this.state.email)){
+        if(!new RegExp('^[a-zA-Z].*@[^@_]+\\.[a-zA-Z]+$').test(this.state.email)){
             this.setState({
                 error: 'Invalid email'
             })
@@ -55,7 +55,15 @@ class Login extends React.Component {
                 this.props.history.goBack();
             })
             .catch(error=>{
-                console.log(error.error);
+                if(error.response.status === 400){
+                    this.setState({
+                        error: error.response.data.error
+                    })
+                }else{
+                    this.setState({
+                        error: "Try Again!"
+                    })
+                }
             })
         }
     }
