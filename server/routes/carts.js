@@ -5,13 +5,11 @@ const User = require('../models/user')
 
 //get cart
 router.get('/', (req, res, next)=>{
-    console.log("in get");
     if(req.session.userId === undefined){
         res.status(200).send({cart : req.session.cart});
     }else{
         User.findOne({ userId: req.session.userId }, { cart: 1 })
         .then(cart=>{
-            console.log("out get");
             res.status(200).send({cart: cart.cart})
         })
         .catch(()=>{
@@ -23,8 +21,6 @@ router.get('/', (req, res, next)=>{
 
 //put product in cart
 router.put('/', (req, res, next)=>{
-    console.log("in put");
-
     const { productId, name, quantity, price } = req.body;
 
     if(req.session.userId === undefined){
@@ -35,7 +31,6 @@ router.put('/', (req, res, next)=>{
 
     User.updateOne({ userId: req.session.userId }, { $push: { cart: { productId: productId, name: name, quantity: quantity, price: price } } })
     .then(()=>{
-        console.log("out put");
         res.status(200).send({message: 'Item Added'})
     })
     .catch(()=>{
@@ -46,8 +41,6 @@ router.put('/', (req, res, next)=>{
 
 //update quantity of a product
 router.patch('/', (req, res, next)=>{
-    console.log("in");
-
     const { productId, incValue } = req.body;
 
     if(incValue === undefined){
@@ -84,13 +77,14 @@ router.patch('/', (req, res, next)=>{
             res.status(200).send({message: 'Quantity Incremented/Decremented'});
             return;
         }else{
-            let query = { userId: req.session.userId, 'cart.productId': productId };
-            if(incValue < 0){
-                query['cart.quantity'] = {$gt:1};
+            let query = { userId: req.session.userId, cart: { $elemMatch: { "productId": productId } } };
+            if( incValue<0 ){
+                query["cart"]["$elemMatch"]["quantity"] = {$gt: 1} 
             }
+            console.log(query);
     
-            User.updateOne(query , { $inc: { 'cart.$.quantity': incValue } })
-            .then(()=>{
+            User.updateOne(query, {$inc: { "cart.$.quantity" : incValue}} )
+            .then((user)=>{
                 res.status(200).send({message: 'Quantity Incremented/Decremented'})
             })
             .catch(()=>{
