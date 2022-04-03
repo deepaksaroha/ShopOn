@@ -18,17 +18,17 @@ const rzpInstance = new Razorpay({
     key_secret: secret
 });
 
-// //get order
-// router.get('/:orderId', auth.authenticate, (req, res, next)=>{
+//get orders
+router.get('/', auth.authenticate, (req, res, next)=>{
 
-//     Order.find({ userId : req.session.userId})
-//     .then((orders)=>{
-//         res.status(200).send({ orders: orders })
-//     })
-//     .catch(()=>{
-//         res.status(500).send({error: 'internal server error'})
-//     })
-// })
+    Order.find({ userId : req.session.userId, status: 'Completed'})
+    .then((orders)=>{
+        res.status(200).send({ orders: orders })
+    })
+    .catch(()=>{
+        res.status(500).send({error: 'internal server error'})
+    })
+})
 
 // get one order
 router.get('/:orderId', auth.authenticate, (req, res, next)=>{

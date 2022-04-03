@@ -47,11 +47,13 @@ class Navbar extends React.Component {
         <div className="account-box">
         {
             this.props.loginStatus ?
-            <button id="nb-logout-btn" onClick={this.props.handleLogout}>Logout</button>
+            <div>
+                <button id="nb-logout-btn" onClick={this.props.handleLogout}>Logout</button>
+            </div> 
             :
             <span>
                 <Link className="nb-acc-links" to="/login">Login</Link>
-                <Link className="nb-acc-links" to="/signup">Signup</Link>
+                <Link className="nb-acc-links" to="/signup">Signup</Link>          
             </span>
         }
         </div>;
@@ -70,15 +72,20 @@ class Navbar extends React.Component {
                         <span id="cart-mob"><img className="icons" src="../images/cart.png" alt="" />({this.props.cartCount})</span>
                     </Link>
 
+                    <Link to="/orders">
+                        <span id="cart-desk">Orders</span>
+                    </Link>
+
                     <div className="account-outer-box">
                         <img className="icons" onClick={this.expandAccOption} src="../images/account.png" alt="account"/>
                         {
                         this.state.isMobile ?
                             <div className="accb1">
                             {accOpt}
+                            {this.props.loginStatus && <div style={{border: '1px solid grey', width: '100%', boxSizing: 'border-box', padding: '5px 0'}}><Link to="/orders">Orders</Link></div>}
                             </div>
                             :
-                            ""
+                            null    
                         }
                         <div className="accb2">
                             {accOpt}

@@ -8,6 +8,7 @@ import Signup from './Signup'
 import ProductDescription from './Productdescription'
 import { Route, Switch } from 'react-router-dom'
 import Order from './Order'
+import Orders from './Orders'
 import Footer from './Footer'
 
 class AppRouter extends React.Component{
@@ -25,6 +26,7 @@ class AppRouter extends React.Component{
                     <Route path="/products/:productId" component={ProductDescription} />
                     <Route path="/cart" component={Cart} />
                     <Route path="/checkout" component={Checkout} />
+                    <Route path="/orders" component={Orders} exact/>
                     <Route path="/orders/:orderId" component={Order} />
                 </Switch>
                 <Footer />
