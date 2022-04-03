@@ -72,9 +72,7 @@ class Navbar extends React.Component {
                         <span id="cart-mob"><img className="icons" src="../images/cart.png" alt="" />({this.props.cartCount})</span>
                     </Link>
 
-                    <Link to="/orders">
-                        <span id="cart-desk">Orders</span>
-                    </Link>
+                    {this.props.loginStatus && <Link to="/orders"><span id="cart-desk">Orders</span></Link>}
 
                     <div className="account-outer-box">
                         <img className="icons" onClick={this.expandAccOption} src="../images/account.png" alt="account"/>
