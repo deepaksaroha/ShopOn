@@ -42,9 +42,10 @@ function ProductCard(props){
 
 
     return <div>
-        <Link to={'/products/'+props.productId}>
         <div className="product-card-box" id={props.productId}>
-            <div className="img-box"><img className="card-img" src={`${props.images[0]}.jpg`} alt=""/></div>
+            <Link to={'/products/'+props.productId}>
+                <div className="img-box"><img className="card-img" src={`${props.images[0]}.jpg`} alt=""/></div>
+            </Link>
             <div className="card-details-box">
                 <p className="card-product-title">{props.name}</p>
                 <p className="card-price">&#8377; {props.price}</p>
@@ -64,7 +65,6 @@ function ProductCard(props){
                 </div>
             </div>
         </div>
-        </Link>
     </div>
 }
 

@@ -3,7 +3,6 @@ const authenticate = (req, res, next) => {
         res.status(401).send({error:'Not Logged In'});
         return;
     }
-
     next();
 };
 

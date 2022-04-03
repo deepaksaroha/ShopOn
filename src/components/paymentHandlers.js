@@ -7,9 +7,13 @@ const paymentHandlers = {
               },
             body: JSON.stringify(options),
         })
-        .then(res=>res.json())
         .then(res=>{
             if(res.ok){
+                fetch('/api/users/cart', {
+                    method: 'DELETE'
+                })
+                .then(()=>{})
+                .catch(()=>{})
                 window.location = `/orders/${options.id}`;
             }
         })

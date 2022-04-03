@@ -9,10 +9,10 @@ router.get('/', (req, res, next)=>{
     }else{
         User.findOne({ userId: req.session.userId }, { cart: 1 })
         .then(cart=>{
-            res.status(200).send({cart: cart.cart})
+            res.status(200).send({cart: cart.cart});
         })
         .catch(()=>{
-            res.status(500).send({error: 'internal server error'})
+            res.status(500).send({error: 'internal server error'});
         })
     }
     return;
@@ -80,7 +80,6 @@ router.patch('/', (req, res, next)=>{
             if( incValue<0 ){
                 query["cart"]["$elemMatch"]["quantity"] = {$gt: 1} 
             }
-            console.log(query);
     
             User.updateOne(query, {$inc: { "cart.$.quantity" : incValue}} )
             .then((user)=>{
@@ -91,6 +90,24 @@ router.patch('/', (req, res, next)=>{
             })
         }
     }
+    return;
+})
+
+//delete cart
+router.delete('/', (req, res)=>{
+
+    if(req.session.userId === undefined){
+        res.status(200).send({message: 'Insufficient permissions'});
+        return;
+    }
+
+    User.updateOne({ userId: req.session.userId }, { $set: { cart: [] } })
+    .then(()=>{
+        res.status(204).send();
+    })
+    .catch(()=>{
+        res.status(500).send({error: 'internal server error'})
+    })
     return;
 })
 

@@ -18,8 +18,8 @@ const rzpInstance = new Razorpay({
     key_secret: secret
 });
 
-//get orders
-// router.get('/', auth.authenticate, (req, res, next)=>{
+// //get order
+// router.get('/:orderId', auth.authenticate, (req, res, next)=>{
 
 //     Order.find({ userId : req.session.userId})
 //     .then((orders)=>{
@@ -30,22 +30,20 @@ const rzpInstance = new Razorpay({
 //     })
 // })
 
-//get one order
-// router.get('/:orderId', (req, res, next)=>{
-//     if(!auth.authenticate()){
-//         res.status(400).send({error: 'User not loggedin'})
-//     }
+// get one order
+router.get('/:orderId', auth.authenticate, (req, res, next)=>{
 
-//     Order.findOne({ orderId : req.params.orderId, userId: req.session.userId })
-//     .then((order)=>{
-//         res.status(200).send({ order: order })
-//     })
-//     .catch(()=>{
-//         res.status(500).send({error: 'internal server error'})
-//     })
-// })
+    const id = req.params.orderId;
+    Order.findById(id)
+    .then((order) => {
+        res.status(200).send({orderData: order});
+    })
+    .catch(()=>{
+        res.status(500).send({error: 'internal server error'});
+    });
+})
 
-//create new order
+// create new order
 router.post('/',  auth.authenticate, (req, res, next)=>{
 
     User.findOne({ userId: req.session.userId }, {_id: 0, cart: 1})
@@ -117,7 +115,7 @@ router.put('/:id', auth.authenticate, (req, res) => {
         const id = orderId;
         Order.findByIdAndUpdate(id, { $set: { status: 'Completed' }})
         .then(() => {
-            res.status(204).send();
+            res.status(200).send("done");
         })
         .catch(()=>{
             res.status(500).send({error: 'internal server error'});
