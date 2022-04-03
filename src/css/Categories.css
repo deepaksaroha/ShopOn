@@ -73,6 +73,7 @@
         border-bottom: none;
         font-size: 18px;
         height: 100%;
+        top: 0;
     }
 
     .category{
@@ -90,6 +91,10 @@
         z-index: 3;
         border: none;
         border-bottom: 1px solid rgb(199, 199, 199);
+    }
+
+    #exp-btn:active{
+        background-color: rgba(128, 128, 128, 0.623);
     }
 
     #full-screen{
