@@ -63,7 +63,6 @@ class ProductDescription extends React.Component{
 
 
     handleAddToCart=()=>{
-        console.log(new Date().getTime());
         axios.put('/api/users/cart',
             {
                 productId: this.state.productData.productId,
@@ -73,11 +72,9 @@ class ProductDescription extends React.Component{
             }
         )
         .then(response=>{
-            console.log(new Date().getTime());
             return axios.get('/api/users/cart')
         })
         .then(response=>{
-            console.log(new Date().getTime());
             this.setState({
                 cart: response.data.cart,
                 cartCount: response.data.cart.length
@@ -148,13 +145,13 @@ class ProductDescription extends React.Component{
                             <div className="des-btn-box">
                                 {
                                     cartProductIds.includes(productData.productId) ?
-                                    <button className="prd-des-btn prd-dec-add-btn"><Link to="/cart">Add to Cart</Link></button>
+                                    <Link to="/cart"><button className="prd-des-btn prd-dec-add-btn">Add to Cart</button></Link>
                                     :
                                     <button className="prd-des-btn prd-dec-add-btn" onClick={this.handleAddToCart}>Add to Cart</button>
                                 }
                                 {
                                     cartProductIds.includes(productData.productId) ?
-                                    <button className="prd-des-btn prd-dec-buy-btn"><Link to="/cart">Buy Now</Link></button>
+                                    <Link to="/cart"><button className="prd-des-btn prd-dec-buy-btn">Buy Now</button></Link>
                                     :
                                     <button className="prd-des-btn prd-dec-buy-btn" onClick={this.handleBuy}>Buy Now</button>
                                 }
