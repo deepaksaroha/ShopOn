@@ -7,7 +7,16 @@ td{
     vertical-align: middle;
 }
 
+.chkout{
+    height: 100px;
+    width: 100px;
+    text-align: center;
+}
+
 .chkout-img{
     max-height: 100px;
     max-width: 100px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
