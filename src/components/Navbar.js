@@ -45,7 +45,7 @@ class Navbar extends React.Component {
     };
 
     
-    componentDidUpdate() {
+    componentDidMount() {
         if(window.IntersectionObserver){
             const images = document.querySelectorAll(".gen-img");
             console.log(images);
@@ -116,6 +116,7 @@ class Navbar extends React.Component {
                         <button id="srch-btn">
                             <img
                                 className="all-img gen-img"
+                                srcSet="../images/srch_b.svg"
                                 data-src="../images/srch_b.svg"
                                 alt="search"
                             />
@@ -127,6 +128,7 @@ class Navbar extends React.Component {
                         <span id="cart-mob">
                             <img
                                 className="icons gen-img"
+                                srcSet="../images/cart.svg"
                                 data-src="../images/cart.png"
                                 alt=""
                             />
@@ -145,6 +147,7 @@ class Navbar extends React.Component {
                             className="icons gen-img"
                             onClick={this.expandAccOption}
                             data-src="../images/account.png"
+                            srcSet="../images/account.png"
                             alt="account"
                         />
                         {this.state.isMobile ? (

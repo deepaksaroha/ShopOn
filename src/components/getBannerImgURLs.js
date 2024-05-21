@@ -1,3 +1,5 @@
+import path from 'path';
+
 function getBannerImgURLs(){
     return [
         '../images/banner1',

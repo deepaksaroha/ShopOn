@@ -16,35 +16,35 @@ class Cart extends React.Component{
         }
     }
 
-    componentDidUpdate() {
-        if(window.IntersectionObserver){
-            const images = document.querySelectorAll(".gen-img");
-            console.log(images);
+    // componentDidUpdate() {
+    //     if(window.IntersectionObserver){
+    //         const images = document.querySelectorAll(".gen-img");
+    //         console.log(images);
     
-            const intersectionObserver = new IntersectionObserver(
-                (entries)=>{
-                    entries.forEach((entry) => {
-                        if(entry.isIntersecting){
-                            const image = entry.target;
-                            if(!image.src){
-                                image.src = image.dataset.src;
-                            }
-                            intersectionObserver.unobserve(image);
-                        }
-                    })
-                },
-                {
-                    rootMargin: "10px",
-                    threshold: 0
-                }
-            )
+    //         const intersectionObserver = new IntersectionObserver(
+    //             (entries)=>{
+    //                 entries.forEach((entry) => {
+    //                     if(entry.isIntersecting){
+    //                         const image = entry.target;
+    //                         if(!image.src){
+    //                             image.src = image.dataset.src;
+    //                         }
+    //                         intersectionObserver.unobserve(image);
+    //                     }
+    //                 })
+    //             },
+    //             {
+    //                 rootMargin: "10px",
+    //                 threshold: 0
+    //             }
+    //         )
 
-            images.forEach(image => {
-                intersectionObserver.observe(image);
-            })
+    //         images.forEach(image => {
+    //             intersectionObserver.observe(image);
+    //         })
 
-        }
-    }
+    //     }
+    // }
 
     componentDidMount(){
         Promise.all([axios.get('/api/users/cart'), axios.get('/api/sessions')])
