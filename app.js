@@ -26,6 +26,7 @@ connect({
 
 }).then(() => {
     //Handle /api with the api middleware
+    console.log("DB connected");
     app.use('/api', session({
         genid() {
             return genuuid() // use UUIDs for session IDs

@@ -10,15 +10,16 @@ exports.connect = (dbConfig) => {
         const {host, username, password, database} = dbConfig;
         // const {host, database} = dbConfig;
         // console.log(password);
-        let absoluteHostName = host;
         
         // const mongoUri = `mongodb://${absoluteHostName}/${database}`;
+
+        let absoluteHostName;
         
         if (username) {
             if (password !== undefined) {
-                absoluteHostName = `${username}:${password}@${absoluteHostName}`;
+                absoluteHostName = `${username}:${password}@${host}`;
             } else {
-                absoluteHostName = `${username}@${absoluteHostName}`;
+                absoluteHostName = `${username}@${host}`;
             }
         }
 
@@ -27,6 +28,7 @@ exports.connect = (dbConfig) => {
         // console.log(abc);
 
         const mongoUri = `mongodb+srv://${absoluteHostName}/${database}?retryWrites=true&w=majority`;
+        // const mongoUri = `mongodb+srv://admins:admins@cluster0.afyc4.mongodb.net/RRDB?retryWrites=true&w=majority`;
         
         
         // const mongoUri = `mongodb://localhost/test2`;

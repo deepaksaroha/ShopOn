@@ -78,6 +78,34 @@ class Products extends React.Component{
     }
 
     componentDidUpdate(prevPros, prevState){
+        console.log("dfsadas")
+        if(window.IntersectionObserver){
+            const images = document.querySelectorAll(".gen-img");
+            console.log(images);
+    
+            const intersectionObserver = new IntersectionObserver(
+                (entries)=>{
+                    entries.forEach((entry) => {
+                        if(entry.isIntersecting){
+                            const image = entry.target;
+                            if(!image.src){
+                                image.src = image.dataset.src;
+                            }
+                            intersectionObserver.unobserve(image);
+                        }
+                    })
+                },
+                {
+                    rootMargin: "10px",
+                    threshold: 0
+                }
+            )
+
+            images.forEach(image => {
+                intersectionObserver.observe(image);
+            })
+
+        }
         if(prevPros === undefined){
             return false;
         }
