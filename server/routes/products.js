@@ -1,6 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const Product = require('../models/product')
+import { Router } from 'express';
+import Prod from '../models/product.js';
+const router = Router();
+
+const { find, findOne } = Prod;
 
 //get products
 router.get('/', (req, res, next)=>{
@@ -11,7 +13,7 @@ router.get('/', (req, res, next)=>{
     if(req.query.priceFrom && req.query.priceTo) { searchObject.price = { $gte: req.query.priceFrom, $lte: req.query.priceTo } }
     if(req.query.color) { searchObject['specification.color'] = req.query.color.split(" ").join("") }
     
-    Product.find(searchObject)
+    find(searchObject)
     .then(products=>{
         res.status(200).send({products: products});
     })
@@ -24,7 +26,7 @@ router.get('/', (req, res, next)=>{
 //get one product
 router.get('/:productId', (req, res, next)=>{
     
-    Product.findOne({productId: req.params.productId})
+    findOne({productId: req.params.productId})
     .then(productData=>{
         res.status(200).send({productData: productData});
     })
@@ -34,4 +36,4 @@ router.get('/:productId', (req, res, next)=>{
     return;
 })
 
-module.exports = router;
+export default router;

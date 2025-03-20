@@ -4,6 +4,9 @@ import "./index.css";
 import AppRouter from "./components/Approuter";
 
 import { BrowserRouter as Router } from "react-router-dom";
+import { interceptorsAxios } from "./utils";
+
+interceptorsAxios();
 
 function App() {
     return (

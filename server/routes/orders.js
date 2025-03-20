@@ -1,15 +1,17 @@
-const express = require('express');
-const Razorpay = require('razorpay')
-const crypto = require('crypto')
+import { Router } from 'express';
+import Razorpay from 'razorpay';
+import { createHmac } from 'crypto';
 
-const auth = require('../middlewares/auth');
-const Order = require('../models/order');
-const User = require('../models/user');
-const dotenv = require('dotenv');
-dotenv.config();
+import { authenticate } from '../middlewares/auth.js';
+import Order from '../models/order.js';
+import userModel from '../models/user.js';
+import { config } from 'dotenv';
+config();
+
+const { find, findById, findByIdAndUpdate } = Order;
 
 const currency = 'INR';
-const router = express.Router();
+const router = Router();
 const rzpKey = process.env.RZP_KEY_ID;
 const secret = process.env.RZP_KEY_SECRET;
 
@@ -19,9 +21,9 @@ const rzpInstance = new Razorpay({
 });
 
 //get orders
-router.get('/', auth.authenticate, (req, res, next)=>{
+router.get('/', authenticate, (req, res, next)=>{
 
-    Order.find({ userId : req.session.userId, status: 'Completed'})
+    find({ userId : req.session.userId, status: 'Completed'})
     .then((orders)=>{
         res.status(200).send({ orders: orders })
     })
@@ -31,10 +33,10 @@ router.get('/', auth.authenticate, (req, res, next)=>{
 })
 
 // get one order
-router.get('/:orderId', auth.authenticate, (req, res, next)=>{
+router.get('/:orderId', authenticate, (req, res, next)=>{
 
     const id = req.params.orderId;
-    Order.findById(id)
+    findById(id)
     .then((order) => {
         res.status(200).send({orderData: order});
     })
@@ -44,9 +46,9 @@ router.get('/:orderId', auth.authenticate, (req, res, next)=>{
 })
 
 // create new order
-router.post('/',  auth.authenticate, (req, res, next)=>{
+router.post('/',  authenticate, (req, res, next)=>{
 
-    User.findOne({ userId: req.session.userId }, {_id: 0, cart: 1})
+    userModel.findOne({ userId: req.session.userId }, {_id: 0, cart: 1})
     .then(usr=>{
         const items = usr.cart;
         let price = 0;
@@ -102,18 +104,18 @@ router.post('/',  auth.authenticate, (req, res, next)=>{
 })
 
 //put razorpay order
-router.put('/:id', auth.authenticate, (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
     const orderId = req.params.id;
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
     if (!razorpay_payment_id || !razorpay_signature) {
         res.status(400).send({ error: "Missing razorpay payment id or signature" });
         return;
     }
-    const generated_signature = crypto.createHmac('sha256', secret).update(razorpay_order_id + "|" + razorpay_payment_id).digest('hex');
+    const generated_signature = createHmac('sha256', secret).update(razorpay_order_id + "|" + razorpay_payment_id).digest('hex');
 
     if (generated_signature === razorpay_signature) {
         const id = orderId;
-        Order.findByIdAndUpdate(id, { $set: { status: 'Completed' }})
+        findByIdAndUpdate(id, { $set: { status: 'Completed' }})
         .then(() => {
             res.status(200).send("done");
         })
@@ -145,4 +147,4 @@ router.put('/:id', auth.authenticate, (req, res) => {
 // })
 
 
-module.exports = router;
+export default router;

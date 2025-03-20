@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const Category = require('../models/category')
+import { Router } from 'express';
+import Cat from '../models/category.js';
+const router = Router();
 
 //get categories
 router.get('/', (req, res, next)=>{
 
-    Category.find()
+    Cat.find()
     .then(categories=>{
         res.status(200).send({categories: categories});
     })
@@ -16,4 +16,4 @@ router.get('/', (req, res, next)=>{
 })
 
 
-module.exports = router;
+export default router;

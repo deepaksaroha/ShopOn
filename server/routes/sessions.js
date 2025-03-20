@@ -1,10 +1,16 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import UserCredential from '../models/user-credential.js';
+import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
+
 const router = express.Router();
 
-const UserCredential = require('../models/user-credential');
-const User = require('../models/user')
+export const SECRET = "d1a6221764e51eeb6fa0b8cd1bc6fd1b0b4a781bc3f3f1defadaee448742659a5801b7ed9e499264707d0060295d6531a558a8b41655873d05b086fc94c23fdf";
 
+const getJWTToken = (data) => {
+    return jwt.sign(data, SECRET);
+}
 
 //user login status
 router.get('/', (req, res)=>{
@@ -51,6 +57,7 @@ router.post('/', (req, res) => {
             return;
         }
 
+        const token = getJWTToken(user.id);
         req.session.userId = user.id;
 
         async function f(){
@@ -63,7 +70,7 @@ router.post('/', (req, res) => {
                 })
             }
             delete req.session.cart;
-            res.status(200).send({message: 'Login successfull'});
+            res.status(200).send({token: token, message: 'Login successfull'});
         }
 
         f();
@@ -85,4 +92,4 @@ router.delete('/', (req, res) => {
     return;
 });
 
-module.exports = router;
+export default router;

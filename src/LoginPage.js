@@ -32,6 +32,7 @@ class LoginPage extends React.Component {
             },
         }).then((res) => {
             if (res.status === 204) {
+                window.localStorage.setItem("auth", res.body.token);
                 window.location = "/profile";
             }
         });

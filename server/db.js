@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+import Mong from "mongoose";
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+Mong.set('useNewUrlParser', true);
+Mong.set('useFindAndModify', false);
+Mong.set('useCreateIndex', true);
 
-exports.connect = (dbConfig) => {
+export function connect(dbConfig) {
     try {
 
         const {host, username, password, database} = dbConfig;
@@ -32,13 +32,13 @@ exports.connect = (dbConfig) => {
         
         
         // const mongoUri = `mongodb://localhost/test2`;
-        return mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+        return Mong.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
     } catch (err) {
         console.log(`Error connecting to MongoDB: ${err}`);
         // throw err;
     }
-};
+}
 
-exports.getClient = () => {
-    return mongoose.connection.getClient();
+export function getClient() {
+    return Mong.connection.getClient();
 }

@@ -1,13 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user')
+import { Router } from 'express';
+import userModel from '../models/user.js';
+const router = Router();
 
 //get cart
 router.get('/', (req, res, next)=>{
     if(req.session.userId === undefined){
         res.status(200).send({cart : req.session.cart});
     }else{
-        User.findOne({ userId: req.session.userId }, { cart: 1 })
+        userModel.findOne({ userId: req.session.userId }, { cart: 1 })
         .then(cart=>{
             res.status(200).send({cart: cart.cart});
         })
@@ -28,7 +28,7 @@ router.put('/', (req, res, next)=>{
         return;
     }
 
-    User.updateOne({ userId: req.session.userId }, { $push: { cart: { productId: productId, name: name, quantity: quantity, price: price } } })
+    userModel.updateOne({ userId: req.session.userId }, { $push: { cart: { productId: productId, name: name, quantity: quantity, price: price } } })
     .then(()=>{
         res.status(200).send({message: 'Item Added'})
     })
@@ -47,7 +47,7 @@ router.patch('/', (req, res, next)=>{
             req.session.cart = req.session.cart.filter(ele=>ele.productId !== productId)
             res.status(200).send({message: 'Item removed from cart'});
         }else{
-            User.updateOne({ userId: req.session.userId }, { $pull: { cart: { productId: productId } } })
+            userModel.updateOne({ userId: req.session.userId }, { $pull: { cart: { productId: productId } } })
             .then(()=>{
                 res.status(200).send({message: 'Item Removed'})
             })
@@ -81,7 +81,7 @@ router.patch('/', (req, res, next)=>{
                 query["cart"]["$elemMatch"]["quantity"] = {$gt: 1} 
             }
     
-            User.updateOne(query, {$inc: { "cart.$.quantity" : incValue}} )
+            userModel.updateOne(query, {$inc: { "cart.$.quantity" : incValue}} )
             .then((user)=>{
                 res.status(200).send({message: 'Quantity Incremented/Decremented'})
             })
@@ -101,7 +101,7 @@ router.delete('/', (req, res)=>{
         return;
     }
 
-    User.updateOne({ userId: req.session.userId }, { $set: { cart: [] } })
+    userModel.updateOne({ userId: req.session.userId }, { $set: { cart: [] } })
     .then(()=>{
         res.status(204).send();
     })
@@ -111,4 +111,4 @@ router.delete('/', (req, res)=>{
     return;
 })
 
-module.exports = router;
+export default router;

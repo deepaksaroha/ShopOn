@@ -1,12 +1,16 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const router = express.Router();
+import { Router } from 'express';
+import bcrypt from 'bcryptjs';
+import { authenticate } from '../middlewares/auth.js';
+import UserCredential from '../models/user-credential.js';
+import User from '../models/user.js';
+import cart from './carts.js';
+import orders from './orders.js';
+const router = Router();
 
-const auth = require('../middlewares/auth');
-const UserCredential = require('../models/user-credential');
-const User = require('../models/user');
-const cart = require('./carts');
-const orders = require('./orders')
+const { findOne: _findOne, updateOne } = User;
+
+const { findOne } = UserCredential;
+
 
 //cart apis
 router.use('/cart', cart);
@@ -32,7 +36,7 @@ router.post('/', (req, res) => {
         return;
     }
 
-    UserCredential.findOne({ email }).then(user => {
+    findOne({ email }).then(user => {
         if (user) {
             res.status(400).send({error: "User already signed up"});
             return;
@@ -72,8 +76,8 @@ router.post('/', (req, res) => {
 
 
 //get user profile
-router.get('/me', auth.authenticate, (req, res) => {
-    User.findOne({ userId: req.session.userId }).then(user => {
+router.get('/me', authenticate, (req, res) => {
+    _findOne({ userId: req.session.userId }).then(user => {
         res.send(user);
     }).catch(() => {
         res.status(500).send({ error: "Internal Server Error" });
@@ -81,7 +85,7 @@ router.get('/me', auth.authenticate, (req, res) => {
 });
 
 //update user data
-router.put('/me', auth.authenticate, (req, res) => {
+router.put('/me', authenticate, (req, res) => {
     const { firstName, lastName, phone, age, gender } = req.body;
 
     const updateQuery = {};
@@ -92,11 +96,11 @@ router.put('/me', auth.authenticate, (req, res) => {
     if(gender !== undefined) updateQuery.gender = gender;
 
     
-    User.updateOne({ _id: req.session.userId }, updateQuery).then(() => {
+    updateOne({ _id: req.session.userId }, updateQuery).then(() => {
         res.status(204).send();
     }).catch(() => {
         res.status(500).send({ error: "Internal Server Error" });
     });
 });
 
-module.exports = router;
+export default router;

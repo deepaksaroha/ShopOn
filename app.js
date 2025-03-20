@@ -1,16 +1,22 @@
-const express = require('express');
-const path = require('path');
-var genuuid = require('uuid').v4;
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+import express from 'express';
+import { join } from 'path';
+import { v4 as genuuid } from 'uuid';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import api from './server/api.js';
+import { connect, getClient } from './server/db.js';
+import * as dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const app = express();
-
-const api = require('./server/api');
-const { connect, getClient } = require('./server/db');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //Configure .env
-require('dotenv').config();
+dotenv.config();
+const app = express();
+
+
 
 //Set port as process.env.PORT if it is present otherwise set it to 4000
 const port = process.env.PORT || 4000;
@@ -48,11 +54,11 @@ connect({
     api);
 
     //Handle non-api routes with static build folder
-    app.use(express.static(path.join(__dirname, 'build')));
+    app.use(express.static(join(__dirname, 'build')));
 
     //Return index.html for routes not handled by build folder
     app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+        res.sendFile(join(__dirname, 'build', 'index.html'));
     });
 
     //Start listening on port
